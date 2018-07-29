@@ -5,7 +5,10 @@ import {
   Text,
   View
 } from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
+import { connect } from 'react-redux';
+import * as randomAction from './logics/random/action'; 
+import { RANDOM } from './commons/actionTypes';
+import { gankio } from './commons/Api';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,23 +17,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  
 });
 
-export default class rnGank extends Component {
+class rnGank extends Component {
 
   componentDidMount() {
-    // 首屏
-    SplashScreen.hide();
+    const {
+      fetchRandomData,
+    } = this.props;
+    fetchRandomData(gankio.type.ANDROID);
   }
   render() {
     return (
@@ -39,3 +35,14 @@ export default class rnGank extends Component {
     );
   }
 }
+
+export default connect(
+  state => {
+    return {
+      ...state
+    };
+  },
+  {
+    ...randomAction,
+  }
+)(rnGank);

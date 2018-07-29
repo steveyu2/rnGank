@@ -5,8 +5,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { connect } from 'react-redux/native';
-import SplashScreen from 'react-native-splash-screen';
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,8 +29,6 @@ const styles = StyleSheet.create({
 export default class rnGank extends Component {
 
   componentDidMount() {
-    // 首屏
-    SplashScreen.hide();
   }
   render() {
     return (
