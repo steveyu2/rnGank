@@ -1,9 +1,9 @@
 import reducers from './reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { composeWithDevTools } from 'remote-redux-devtools';
+// import { composeWithDevTools } from 'remote-redux-devtools';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
-import appConfig from '../commons/appConfig';
+import { DEV } from '../commons/constants';
 import rootSaga from '../logics/rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -13,8 +13,8 @@ let middleware = [
 ];
 let composeFunc = compose;
 
-if(appConfig.DEV) {
-  composeFunc = composeWithDevTools;
+if(DEV) {
+  // composeFunc = composeWithDevTools;
   middleware = [
     ...middleware,
     logger,

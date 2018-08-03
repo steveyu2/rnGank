@@ -29,10 +29,10 @@ const request = options => {
 
 class Api {
   // 随机数据
-  fetchRandomData(type, num) {
+  fetchRandomData(type, limit) {
     return request({
       method:'get',
-      url: `${gankio.domain}api/random/data/${type}/${num}`,
+      url: `${gankio.domain}api/random/data/${type}/${limit}`,
       headers: { 'content-type': contentType.json  },
     })
   }
@@ -45,18 +45,18 @@ class Api {
     })
   }
   // 指定数据
-  fetchAppointTypeData(type, num, page) {
+  fetchAppointTypeData(type, limit, page) {
     return request({
       method:'get',
-      url: `${gankio.domain}api/data/${type}/${num}/${page}`,
+      url: `${gankio.domain}api/data/${type}/${limit}/${page}`,
       headers: { 'content-type': contentType.json  },
     })
   }
   // 搜索
-  fetchSearchTypeData(query, type, num, page) {
+  fetchSearchTypeData(query, type, limit, page) {
     return request({
       method:'get',
-      url: `${gankio.domain}api/search/${query}/listview/category/${type}/count/${num}/page/${page}`,
+      url: `${gankio.domain}api/search/${query}/listview/category/${type}/count/${limit}/page/${page}`,
       headers: { 'content-type': contentType.json  },
     })
   }

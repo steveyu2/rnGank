@@ -1,4 +1,4 @@
-import { RANDOM } from '../../commons/actionTypes';
+import { APPOINT_TYPE } from '../../commons/actionTypes';
 import Api, { gankio } from '../../commons/Api';
 
 const dataState = {
@@ -6,6 +6,7 @@ const dataState = {
   error: false,
   data: [],
   limit: 12,
+  page: 1,
 };
 
 const initState = {
@@ -19,11 +20,11 @@ const initState = {
   [gankio.type.APP]: {...dataState},
 };
 
-function random(state = initState, action = {}) {
+function appointType(state = initState, action = {}) {
   const { dataType, data } = action.payload || {};
 
   switch (action.type) {
-    case RANDOM.REQUEST:
+    case APPOINT_TYPE.REQUEST:
       return {
         ...state,
         [dataType]: {
@@ -32,27 +33,29 @@ function random(state = initState, action = {}) {
         },
       };
       break;
-    case RANDOM.REFRESH:
+    case APPOINT_TYPE.REFRESH:
       return {
         ...state,
         [dataType]: {
           ...state[dataType],
           loading: false,
           data: data,
+          page: 1,
         },
       };
       break;
-    case RANDOM.SUCCESS:
+    case APPOINT_TYPE.SUCCESS:
       return {
         ...state,
         [dataType]: {
           ...state[dataType],
           loading: false,
           data: [...state[dataType].data, ...data],
+          page: state[dataType].page + 1,
         },
       };
       break;
-    case RANDOM.FAILURE:
+    case APPOINT_TYPE.FAILURE:
       return {
         ...state[dataType],
         loading: false,
@@ -64,4 +67,4 @@ function random(state = initState, action = {}) {
   }
 }
 
-export default random;
+export default appointType;
