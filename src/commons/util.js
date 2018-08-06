@@ -11,7 +11,7 @@ export const Console = {
   }
 }
 
-export const parseColorToRgba = (color, opacity = 1) => {
+export const parseColorToRgba = (color, opacity = 1, {R=0, G=0, B=0}) => {
   try{
     color = color.split("#")[1];
     color.length === 3 && (color = color + color);
@@ -22,7 +22,12 @@ export const parseColorToRgba = (color, opacity = 1) => {
         return a;
       },[])
       .map(v => parseInt('0x'+v))
-      .join(',');
+
+      color[0] += R,
+      color[1] += G,
+      color[2] += B,
+
+      color = color.join(',');
     return `rgba(${color},${opacity})`;
   } catch(err) {
     Console.log("func parseColorToRgba error: ",err)

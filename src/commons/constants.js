@@ -1,4 +1,5 @@
 import { Platform, StatusBar, Dimensions, PixelRatio } from "react-native";
+import { Header } from 'react-navigation';
 // import { isIphoneX } from "react-native-iphone-x-helper";
 
 const baseScreenHeight = 1280;
@@ -6,7 +7,9 @@ const baseScreenWidth = 720;
 const fontScale = PixelRatio.getFontScale();
 export const SCREEN_HEIGHT = Dimensions.get('window').height;
 export const SCREEN_WIDTH = Dimensions.get('window').width;
-
+export const HEADER_HEIGHT = Header.HEIGHT; 
+export const MAIN_COLOR= "#2196f3"; //33 150 243  -33 -15 0
+        
 // 适配单位
 export const adaptUnits = (num, type) => {
 

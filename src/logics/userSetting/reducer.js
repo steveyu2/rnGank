@@ -1,12 +1,12 @@
 import { MAIN_COLOR } from '../../commons/actionTypes';
-
+import  * as constants from '../../commons/constants';
 // const stateTemp = {
 //   loading: false,
 //   error: false,
 // }; 
 const initState = {
   mainColor: {
-    value: '#2196f3',
+    value: constants.MAIN_COLOR,
     loading: false,
   },
   themeName: {

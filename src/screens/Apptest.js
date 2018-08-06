@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
   },
   
 });
@@ -52,26 +52,7 @@ class rnGank extends Component {
           onPress={() => navigate(SCREENS.S.HOME) }
           buttonStyle={{margin: 10}}
           />
-          <Button 
-            title={SCREENS.S.HOME}
-            icon={{name: 'home', type: 'font-awesome', color: "#fff"}}
-            onPress={() => navigate(SCREENS.S.HOME) }
-            buttonStyle={{margin: 10}}
-            />
-            <Button 
-              title={SCREENS.S.HOME}
-              icon={{name: 'home', color: "#fff"}}
-              onPress={() => navigate(SCREENS.S.HOME) }
-              buttonStyle={{margin: 10}}
-              />
-              <Icon
-                name='sc-telegram'
-                type='evilicon'
-                color='#517fa4'
-              />
-              
         <Button
-          large
           title={SCREENS.S.WEBVIEW}
           icon={{name: 'blur-on', type: 'mat​​erial-community'}}
           onPress={() => navigate(SCREENS.S.WEBVIEW) }

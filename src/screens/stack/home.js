@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { SCREENS } from '../../commons/constants';
+import NavigateHeader from '../../components/navigateHeader';
 
 // import { connect } from 'react-redux';
 // import * as randomAction from './logics/random/action'; 
@@ -18,15 +19,14 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFF',
   },
-  
 });
 
 class Home extends Component {
   
   static navigationOptions = ({ navigation }) => ({
-    header: '',
+    header: <NavigateHeader title="Home" navigation={navigation}/>,
   });
 
   constructor() {
@@ -38,7 +38,7 @@ class Home extends Component {
 
     return (
       <View style={styles.container}>
-        <Text h2>Heading 2</Text>
+        <Text h2>Headingd 2</Text>
         <Button 
           title={SCREENS.S.WEBVIEW}
           icon={{name: 'home', color: "#fff"}}
