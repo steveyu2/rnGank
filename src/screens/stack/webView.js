@@ -15,7 +15,7 @@ import LoadingView from '../../components/loadingView';
 // import { gankio } from './commons/Api';
 // import { FONT_SIZE } from './commons/constants';
 
-class WebViewComponent extends Component {
+class WebViewStack extends Component {
 
   static navigationOptions = ({ navigation, mainColor }) => ({
     header: (
@@ -40,8 +40,6 @@ class WebViewComponent extends Component {
   }
 
   setLoadingEnd = () => {
-    const {
-    } = this;
     // debugger
     this.setState({
       loading: false,
@@ -111,5 +109,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(({ userSetting })=>({
-  mainColor: userSetting.mainColor.value,
-}))(WebViewComponent);
+  mainColor: userSetting.mainColor,
+}))(WebViewStack);

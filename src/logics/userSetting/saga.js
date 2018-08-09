@@ -1,29 +1,38 @@
 import {
-  call,
   put,
   takeLatest,
-  select,
 } from 'redux-saga/effects';
+import { delay } from 'redux-saga'
 import {
-  setMainColor,
-  setMainColorSuccess,
-  setMainColorFailure,
+  setUserSetting,
+  setUserSettingSuccess,
+  setUserSettingFailure,
 } from './action';
-import { MAIN_COLOR } from '../../commons/actionTypes';
+import { USER_SETTING } from '../../commons/actionTypes';
 import { Console } from '../../commons/util';
+import { setLanguge } from '../../commons/i18n';
+import { setTheme } from '../../commons/theme';
 
-function* mainColor(action) {
+function* userSetting(action) {
   try {
-    const { color, callback } = action.payload;
+    const { setting } = action.payload;
+    const {
+      mainColor,
+      languge,
+      themeName,
+    } = setting;
 
-    yield put(setMainColorSuccess(color));
-
+    languge && setLanguge(languge)
+    themeName && setTheme(themeName)
+    // yield delay(300);
+    
+    yield put(setUserSettingSuccess(setting));
   } catch(err) {
     Console.error(err);
-    yield put(setMainColorFailure(err));
+    yield put(setUserSettingFailure(err));
   }
 }
 
 export default function* userSettingWatch() {
-  yield takeLatest(MAIN_COLOR.REQUEST, mainColor);
+  yield takeLatest(USER_SETTING.REQUEST, userSetting);
 }

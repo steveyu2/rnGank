@@ -1,41 +1,32 @@
-import { MAIN_COLOR } from '../../commons/actionTypes';
-import  * as constants from '../../commons/constants';
-// const stateTemp = {
-//   loading: false,
-//   error: false,
-// }; 
+import { USER_SETTING } from '../../commons/actionTypes';
+import  { DEFAULT_SETTING } from '../../commons/constants';
+
 const initState = {
-  mainColor: {
-    value: constants.MAIN_COLOR,
-    loading: false,
-  },
-  themeName: {
-    value: '#normal',
-    loading: false,
-  },
+  ...DEFAULT_SETTING,
+  loading: false,
 };
 
 function userSetting(state = initState, action = {}) {
-  const { color } = action.payload || {};
+  const { setting } = action.payload || {};
 
   switch (action.type) {
-    case MAIN_COLOR.REQUEST:
+    case USER_SETTING.REQUEST:
       return {
         ...state,
-        mainColor: {
-          ...state.mainColor,
-          loading: true,
-        }
+        loading: true,
       };
       break;
-    case MAIN_COLOR.SUCCESS:
+    case USER_SETTING.SUCCESS:
       return {
         ...state,
-        mainColor: {
-          ...state.mainColor,
-          value: color,
-          loading: false,
-        }
+        ...setting,
+        loading: false,
+      };
+      break;
+    case USER_SETTING.FAILURE:
+      return {
+        ...state,
+        loading: false,
       };
       break;
     default:

@@ -7,8 +7,6 @@ import {
   TouchableNativeFeedback,
   Platform
 } from 'react-native';
-import PropTypes from 'prop-types';
-
 
 class Button extends Component{
   render() {
@@ -37,6 +35,7 @@ class Button extends Component{
         <TouchableNativeFeedback
           background={ TouchableNativeFeedback.Ripple(nativeUnderlayColor, ripple) }
           onPress={onPress}
+          style={{borderRadius: 50}}
         >
           <View style={style}>{children}</View>
         </TouchableNativeFeedback>

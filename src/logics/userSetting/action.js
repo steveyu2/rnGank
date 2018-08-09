@@ -1,12 +1,12 @@
-import { MAIN_COLOR } from '../../commons/actionTypes';
+import { USER_SETTING } from '../../commons/actionTypes';
 
 // 主色调
-export function setMainColor(color) {
-  return { type: MAIN_COLOR.REQUEST, payload: {color} }
+export function setUserSetting(setting) {
+  return { type: USER_SETTING.REQUEST, payload: {setting} }
 }
-export function setMainColorSuccess(color) {
-  return { type: MAIN_COLOR.SUCCESS, payload: {color} }
+export function setUserSettingSuccess(setting) {
+  return { type: USER_SETTING.SUCCESS, payload: {setting} }
 }
-export function setMainColorFailure(...err) {
-  return { type: MAIN_COLOR.FAILURE, payload: {...err} }
+export function setUserSettingFailure(...err) {
+  return { type: USER_SETTING.FAILURE, payload: {...err} }
 }

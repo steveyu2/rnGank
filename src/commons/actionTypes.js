@@ -13,6 +13,4 @@ export const APPOINT_DAY = defineAction('APPOINT_DAY', [SUCCESS, FAILURE, REQUES
 // 搜索数据 
 export const SEARCH_TYPE = defineAction('APPOINT_DAY', [SUCCESS, FAILURE, REQUEST, REFRESH], GANK);
 // 设置 
-export const USER_SETTING = defineAction('USER_SETTING', [REFRESH], GANK);
-// 主色调
-export const MAIN_COLOR = defineAction('MAIN_COLOR', [SUCCESS, FAILURE, REQUEST], USER_SETTING);
+export const USER_SETTING = defineAction('USER_SETTING', [SUCCESS, FAILURE, REQUEST], GANK);

@@ -13,6 +13,7 @@ import {
   adaptUnits,
 } from '../commons/constants';
 import MyButton from './button';
+import HeaderButton from './navigateHeaderButton';
 
 
 class NavigateHeader extends PureComponent{
@@ -22,7 +23,8 @@ class NavigateHeader extends PureComponent{
       onPress={() => navigation.goBack()}
       style={styles.backBtn}
       ripple={true}
-    >
+      ripplecolor="white"
+      >
       <Icon
         large
         name="md-arrow-back"
@@ -35,13 +37,14 @@ class NavigateHeader extends PureComponent{
 
   render() {
     const {
+      navigation = { goBack: ()=>{} },
       title="", //str
-      backBtn = true, // boolean
+      titleAlign="left",
+      backBtn = true,  
       leftComponent = false, // 左侧组件
       rightComponent = false, // 左侧组件
-      mainColor=MAIN_COLOR,
+      mainColor = MAIN_COLOR,
       btnColor="#fff",
-      navigation,
     } = this.props;  
 
     addStyle = {
@@ -52,11 +55,15 @@ class NavigateHeader extends PureComponent{
       <View style={[ styles.container, addStyle.container]}>
         <View style={styles.leftWrap}>
           {backBtn && this.backBtn({ navigation, btnColor })}
+          <HeaderButton name="md-menu"/>
           {leftComponent && leftComponent}
+          {titleAlign === 'left' && <Text style={styles.title}>{title}</Text>}
         </View>
-        <Text style={styles.title}>{title}</Text>
+          {titleAlign === 'center' && <Text style={styles.title}>{title}</Text>}
         <View style={styles.rightWrap}>
+          {titleAlign === 'right' && <Text style={styles.title}>{title}</Text>}
           {rightComponent && rightComponent}
+          <HeaderButton/>
         </View>
       </View>
     );
@@ -96,21 +103,22 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     height: HEADER_HEIGHT,
+    paddingLeft: adaptUnits(10 ,'W'),
     flexDirection: 'row',
     alignItems: 'center',
-    // backgroundColor: "rgba(0, 0, 0, 0.4)",
   },  
   rightWrap: {
     position: "absolute",
     right: 0,
     height: HEADER_HEIGHT,
+    paddingRight: adaptUnits(10 ,'W'),
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'flex-start',
   },
   backBtn: {
     height: HEADER_HEIGHT / 1.2,
     width: HEADER_HEIGHT, 
+    marginLeft: adaptUnits(-12 ,'W'),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -121,4 +129,5 @@ const styles = StyleSheet.create({
   },
 });
 
+export { HeaderButton };
 export default NavigateHeader;
