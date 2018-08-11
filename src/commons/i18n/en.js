@@ -17,4 +17,7 @@ export default {
   hoursAgo: 'hours ago',
   daysAgo: 'days ago',
   unknown: 'Unknown',
+  leisure: 'leisure',
+  skill: 'technology',
+  dayNew: 'Daily updated',
 };

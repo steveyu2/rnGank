@@ -6,11 +6,11 @@ import FlatList from '../../../components/FlatList';
 import gankRenderItems from '../../../components/gankRenderItems';
 import LoadingView from '../../../components/loadingView';
 import { gankio } from '../../../commons/Api';
-import { RANDOM } from '../../../commons/actionTypes';
-import * as randomAction from '../action';
+import { APPOINT_TYPE } from '../../../commons/actionTypes';
+import * as appointTypeAction from '../action';
 import { propsDiff } from '../../selector';
 
-class RandomFlatList extends Component {
+class AppointTypeFlatList extends Component {
   constructor(props) {
     super(props);
 
@@ -24,7 +24,7 @@ class RandomFlatList extends Component {
     return propsDiff(this.props, nextProps)
   }
 
-  _keyExtractor  = data => data._id;
+  _keyExtractor  = (data, i) => data._id;
 
   _renderItem ({item , i}) {
     const {
@@ -46,32 +46,32 @@ class RandomFlatList extends Component {
 
   componentWillMount() {
     const {
-      refreshRandomData,
+      refreshAppointTypeData,
       dataGankType,
       data,
     } = this.props;
 
     if(data[dataGankType].data.length === 0) {
-      refreshRandomData(dataGankType, RANDOM.REFRESH)
+      refreshAppointTypeData(dataGankType, APPOINT_TYPE.REFRESH)
     }
   }
 
   _onRefresh() {
     const {
-      refreshRandomData,
+      refreshAppointTypeData,
       dataGankType,
     } = this.props;
 
-    refreshRandomData(dataGankType, RANDOM.REFRESH)
+    refreshAppointTypeData(dataGankType, APPOINT_TYPE.REFRESH)
   }
 
   _onEndReached() {
     const {
-      fetchRandomData,
+      fetchAppointTypeData,
       dataGankType,
     } = this.props;
 
-    fetchRandomData(dataGankType)
+    fetchAppointTypeData(dataGankType)
   }
 
   render() {
@@ -124,13 +124,13 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  ({ userSetting, random }) => {
+  ({ userSetting, appointType }) => {
     return {
       mainColor: userSetting.mainColor,
-      data: random,
+      data: appointType,
     };
   },
   {
-    ...randomAction,
+    ...appointTypeAction,
   }
-)(RandomFlatList);
+)(AppointTypeFlatList);

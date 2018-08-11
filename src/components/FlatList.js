@@ -42,12 +42,13 @@ class MyFlatList extends Component {
   ScrollViewFooter (props={}) {
     const {
       data,
-      mainColor
+      mainColor,
+      onEndReached,
     } = this.props;
     const state = this.props.pullUpLoading;
-    return <ScrollViewFooter state={ state } mainColor={mainColor} {...props}/>
+    return <ScrollViewFooter state={ state } mainColor={mainColor} retry={onEndReached} {...props}/>
   };
-    
+  
   render() {
     const {
       // style,

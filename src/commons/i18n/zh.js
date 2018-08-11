@@ -17,4 +17,7 @@ export default {
   hoursAgo: '小时前',
   daysAgo: '天前',
   unknown: '未知',
+  leisure: '休闲',
+  skill: '技术',
+  dayNew: '每日最新',
 };

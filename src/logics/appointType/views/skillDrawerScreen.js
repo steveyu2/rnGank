@@ -8,16 +8,16 @@ import i18n from '../../../commons/i18n';
 import ScrollableTabView from '../../../components/ScrollableTabView';
 import DrawerNavigateHeader from '../../../components/drawerNavigateHeader';
 import { gankio } from '../../../commons/Api';
-import RandomFlatList from './randomFlatList';
+import AppointTypeFlatList from './appointTypeFlatList';
 import { propsDiff } from '../../selector';
 
-class RandomDrawer extends Component{
+class SkillDrawerScreen extends Component{
 
   static navigationOptions = ({ navigation }) => ({
-    drawerLabel: i18n.randomRecommendation,
+    drawerLabel: i18n.skill,
     drawerIcon: ({ focused, tintColor }) => (
       <Icon
-        name="md-infinite"
+        name="logo-codepen"
         type="ionicon"
         color={focused? tintColor: '#000'}
       />
@@ -29,11 +29,8 @@ class RandomDrawer extends Component{
 
     // i18n -> gankio.type
     this.dataType = {
-      all: 'ALL',
-      welfare: 'FULI',
       android: 'ANDROID',
       ios: 'IOS',
-      leisureVideo: 'LEISUREVIDEO',
       expand: 'EXPAND',
       web: 'WEB',
       blindRecommend: 'BLINDRECOMMEND',
@@ -58,7 +55,7 @@ class RandomDrawer extends Component{
 
     return TabTitles.map((v, i) => {
       return (
-        <RandomFlatList 
+        <AppointTypeFlatList 
           key={i}
           dataType={this.dataType[v]}
           dataGankType={gankio.type[this.dataType[v]]}
@@ -79,7 +76,7 @@ class RandomDrawer extends Component{
     return (
       <View style={[styles.container, {backgroundColor: bgColor}]}>
         <DrawerNavigateHeader 
-          title={i18n.randomRecommendation}
+          title={i18n.skill}
           navigation={navigation} 
           mainColor={mainColor}
         />
@@ -111,4 +108,4 @@ export default connect(
       // data: random,
     };
   }
-)(RandomDrawer);
+)(SkillDrawerScreen);

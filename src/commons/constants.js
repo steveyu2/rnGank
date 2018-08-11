@@ -51,7 +51,7 @@ export const FONT_SIZE = {
   XXXXXXS: adaptUnits(6, 'F'),
 };
 
-export const DEV = true;
+export const DEV = false;
 
 export const REQUEST = 'REQUEST';
 export const SUCCESS = 'SUCCESS'; 
@@ -68,6 +68,9 @@ SCREENS.S = [
 ].reduce((a, b) => ({...a, [b]: b + '_stack'}), {});
 // drawer screens
 SCREENS.D = [
+  'DAYNEW',
   'RANDOM',
+  'SKILL',
+  'LEISURE',
 ].reduce((a, b) => ({...a, [b]: b + '_drawer'}), {});
 

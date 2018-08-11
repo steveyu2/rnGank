@@ -50,7 +50,7 @@ class ContentComponent extends Component{
             {...this.props}
             onItemPress={this._onItemPress}
             activeTintColor={mainColor}
-            inactiveTintColor="red"
+            inactiveTintColor="#666"
           />
         </ScrollView>
         <NavFooter />

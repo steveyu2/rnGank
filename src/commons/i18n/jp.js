@@ -17,4 +17,7 @@ export default {
   hoursAgo: '時間前',
   daysAgo: '日前',
   unknown: '知らない',
+  leisure: '余暇',
+  skill: '技術',
+  dayNew: '毎日最新の',
 };

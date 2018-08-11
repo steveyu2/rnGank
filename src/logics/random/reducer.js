@@ -1,9 +1,10 @@
 import { RANDOM } from '../../commons/actionTypes';
-import Api, { gankio } from '../../commons/Api';
+import { gankio } from '../../commons/Api';
 import { PULLUPLOAD } from '../../components/pullUploading';
+import { arrayUnique } from '../selector';
 
 const dataState = {
-  loaded: true, // 初次加载
+  loaded: false, // 初次加载
   refreshLoading: false, // 下拉
   loading: false, //上拉
   error: false,
@@ -43,7 +44,7 @@ function random(state = initState, action = {}) {
         [dataType]: {
           ...state[dataType],
           refreshLoading: true,
-          loading: PULLUPLOAD.ING,
+          loading: false,
         },
       };
       break;
@@ -52,15 +53,14 @@ function random(state = initState, action = {}) {
         ...state,
         [dataType]: {
           ...state[dataType],
-          data: isRefreshRequest? data: [...state[dataType].data, ...data],
+          data: arrayUnique(isRefreshRequest? data: [...state[dataType].data, ...data]),
           refreshLoading: isRefreshRequest? false: state[dataType].refreshLoading,
-          loading: isRefreshRequest? state[dataType].loading: PULLUPLOAD.ING,
-          loaded: false,
+          loading: isRefreshRequest? state[dataType].loading: PULLUPLOAD.SUCCESS,
+          loaded: true,
         },
       };
       break;
     case RANDOM.FAILURE:
-      debugger
       return {
         ...state,
         [dataType]: {

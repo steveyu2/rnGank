@@ -35,7 +35,6 @@ class Button extends Component{
         <TouchableNativeFeedback
           background={ TouchableNativeFeedback.Ripple(nativeUnderlayColor, ripple) }
           onPress={onPress}
-          style={{borderRadius: 50}}
         >
           <View style={style}>{children}</View>
         </TouchableNativeFeedback>

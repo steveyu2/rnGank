@@ -181,3 +181,18 @@ export const randomColor = () => {
   }
   return color;
 };
+
+// 数组去重
+export const arrayUnique = (currArr, key=v=>v) => {
+  let arr = []; 　　 //创建一个临时数组
+  let obj = {}; 　　//创建一个空对象
+  debugger
+  for(let i = 0, k; i < currArr.length; i++){ 　　//遍历当前要去重的数组
+   k = key(currArr[i]);
+   if(!obj[k]){  　//判断obj对象中是否存有当前项，没有则执行
+    arr.push(currArr[i]); 　　//将当前项push到临时数组中
+    obj[k] = 1; 　　//将当前项存入obj对象
+   }
+  }
+  return arr;
+}

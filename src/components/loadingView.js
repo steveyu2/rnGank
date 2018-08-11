@@ -6,9 +6,10 @@ import {
 } from 'react-native';
 import Spinkit from 'react-native-spinkit';
 import { Icon } from 'react-native-elements';
+import * as Animatable from 'react-native-animatable';
 import { adaptUnits, FONT_SIZE } from '../commons/constants';
 import { parseColorToRgba } from '../commons/util';
-import * as Animatable from 'react-native-animatable';
+import Button from '../components/button';
 
 class LoadingView extends PureComponent{
 
@@ -25,15 +26,18 @@ class LoadingView extends PureComponent{
 
   render() {
     const {
-      style={},
-      loadingStyle={},
       text,
-      fullScreen=false,
-      textColor='#444',
-      textSize= FONT_SIZE.SM,
-      _ref=()=>{},
+      btnText, 
       infoIconName,
       infoIconType='ionicon',
+      style={},
+      loadingStyle={},
+      fullScreen=false,
+      textColor='#444',
+      textSize = FONT_SIZE.SM,
+      textAlign = 'bottom', // right
+      btnOnPress = () => {}, 
+      _ref=()=>{},
     } = this.props;
     let {
       loadingType="1",
@@ -46,16 +50,17 @@ class LoadingView extends PureComponent{
 
     // 附加样式
     const addStyle = {
-      container: {},
-      loadingContainer: {},
+      container: {  },
+      loadingContainer: {
+        flexDirection: textAlign === 'bottom'? 'column': 'row',
+      },
     }
 
     // 全屏
     if(fullScreen) {
-      addStyle.container = {
-        height: '100%',
-      };
+      addStyle.container = { height: '100%' };
       addStyle.loadingContainer = {
+        ...addStyle.loadingContainer,
         marginTop: adaptUnits(-300 ,'H'),
       };
     }
@@ -68,9 +73,9 @@ class LoadingView extends PureComponent{
       compView = (
         <View
           style={[
-          styles.loadingContainer,
-          addStyle.loadingContainer,
-          loadingStyle,
+            styles.loadingContainer,
+            addStyle.loadingContainer,
+            loadingStyle,
           ]}
         >
           <Spinkit
@@ -111,6 +116,17 @@ class LoadingView extends PureComponent{
             ]}
             >{text}</Text>
           )}
+          {btnText && (
+            <Button style={[styles.btnWrap, {backgroundColor: color,}]} onPress={btnOnPress}>
+              <Text
+                style={[
+                  {color: '#fff', fontSize: textSize}
+                ]}
+              >
+                {btnText}
+              </Text>
+            </Button>
+          )}
         </View>);
     }
 
@@ -140,17 +156,26 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     marginTop: adaptUnits(15 ,'H'),
+    paddingBottom: adaptUnits(25 ,'W'),
   },
   infoContainer: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     paddingTop: adaptUnits(25 ,'W'),
     paddingBottom: adaptUnits(25 ,'W'),
   },
   infoText: {
     marginLeft: adaptUnits(10 ,'W'),
   },
+  btnWrap: {
+    marginLeft: adaptUnits(10 ,'W'),
+    paddingLeft: adaptUnits(10 ,'W'),
+    paddingRight: adaptUnits(10 ,'W'),
+    paddingTop: adaptUnits(5 ,'W'),
+    paddingBottom: adaptUnits(5 ,'W'),
+    borderRadius: 3,
+  }
 });
 
 export default LoadingView;

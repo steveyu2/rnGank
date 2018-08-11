@@ -2,7 +2,7 @@ import { RANDOM } from '../../commons/actionTypes';
 
 export function fetchRandomData(dataType, loadType) {
   return {
-    type: RANDOM.REQUEST + dataType,
+    type: `${RANDOM.REQUEST}_${dataType}`,
     payload: {
       dataType,
       loadType,
@@ -11,7 +11,7 @@ export function fetchRandomData(dataType, loadType) {
 }
 export function refreshRandomData(dataType, loadType) {
   return {
-    type: RANDOM.REQUEST + dataType,
+    type: `${RANDOM.REQUEST}_${dataType}`,
     payload: {
       dataType,
       loadType,
