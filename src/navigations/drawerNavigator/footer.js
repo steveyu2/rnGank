@@ -1,8 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { adaptUnits, FONT_SIZE } from '../../commons/constants';
 import MyButton from '../../components/button';
+
+class MyIcon extends PureComponent {
+  render() {
+    return (
+      <Icon
+        raised
+        component={_props => (<MyButton {..._props} noAction onPress={()=>console.log(1)} />)}
+        containerStyle={[styles.icon, {backgroundColor: "#FA8072"}]}
+        size={adaptUnits(15, 'F')}
+        color="#fff" // #F4A460
+        type="material-community"
+        name="puzzle"
+        {...this.props }
+        onPress={undefined}
+      />
+    )
+  }
+}
 
 class DrawerNavigatorFooter extends Component{
 
@@ -10,25 +28,16 @@ class DrawerNavigatorFooter extends Component{
     return (
       <View style={styles.container}>
       {/* 主题 */}
-      <Icon
-        raised
-        containerStyle={styles.icon}
-        size={adaptUnits(15, 'F')}
-        color="#FA8072" // #F4A460
-        type="material-community"
+      <MyIcon
+        containerStyle={[styles.icon, {backgroundColor: "#FA8072"}]} // #F4A460
         name="puzzle"
-        underlayColor="#eee"
         onPress={()=>console.log(1)}
       />
       {/* 设置 */}
-        <Icon
+        <MyIcon
           raised
-          containerStyle={styles.icon}
-          size={adaptUnits(15, 'F')}
-          color="#4682B4"
-          type="material-community"
+          containerStyle={[styles.icon, {backgroundColor: "#4682B4"}]}
           name="settings"
-          underlayColor="#eee"
           onPress={()=>console.log(1)}
         />
       </View>

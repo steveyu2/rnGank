@@ -14,7 +14,7 @@ class ContentComponent extends Component{
   }
 
   _onItemPress = ({route, focused}) => {
-    // const navigation = props.navigation;
+    // const navigation = this.props.navigation;
     // navigation.navigate('DrawerClose')
     // setTimeout(() => navigation.navigate(route.routeName), 0);
     if (!focused) {

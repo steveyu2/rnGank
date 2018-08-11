@@ -1,18 +1,22 @@
 import { RANDOM } from '../../commons/actionTypes';
 import Api, { gankio } from '../../commons/Api';
+import { PULLUPLOAD } from '../../components/pullUploading';
 
 const dataState = {
-  loading: false,
+  loaded: true, // 初次加载
+  refreshLoading: false, // 下拉
+  loading: false, //上拉
   error: false,
   data: [],
-  limit: 12,
+  limit: 30,
 };
 
 const initState = {
   [gankio.type.ALL]: {...dataState},
-  [gankio.type.FULI]: {...dataState},
+  [gankio.type.FULI]: {...dataState, limit: 15,},
   [gankio.type.ANDROID]: {...dataState},
   [gankio.type.IOS]: {...dataState},
+  [gankio.type.WEB]: {...dataState},
   [gankio.type.LEISUREVIDEO]: {...dataState}, // 休息视频
   [gankio.type.EXPAND]: {...dataState}, // 拓展资源
   [gankio.type.BLINDRECOMMEND]: {...dataState}, // 瞎推荐
@@ -20,7 +24,8 @@ const initState = {
 };
 
 function random(state = initState, action = {}) {
-  const { dataType, data } = action.payload || {};
+  const { dataType, data, loadType } = action.payload || {};
+  const isRefreshRequest = loadType === RANDOM.REFRESH;
 
   switch (action.type) {
     case RANDOM.REQUEST:
@@ -28,7 +33,7 @@ function random(state = initState, action = {}) {
         ...state,
         [dataType]: {
           ...state[dataType],
-          loading: true,
+          loading: PULLUPLOAD.ING,
         },
       };
       break;
@@ -37,8 +42,8 @@ function random(state = initState, action = {}) {
         ...state,
         [dataType]: {
           ...state[dataType],
-          loading: false,
-          data: data,
+          refreshLoading: true,
+          loading: PULLUPLOAD.ING,
         },
       };
       break;
@@ -47,16 +52,23 @@ function random(state = initState, action = {}) {
         ...state,
         [dataType]: {
           ...state[dataType],
-          loading: false,
-          data: [...state[dataType].data, ...data],
+          data: isRefreshRequest? data: [...state[dataType].data, ...data],
+          refreshLoading: isRefreshRequest? false: state[dataType].refreshLoading,
+          loading: isRefreshRequest? state[dataType].loading: PULLUPLOAD.ING,
+          loaded: false,
         },
       };
       break;
     case RANDOM.FAILURE:
+      debugger
       return {
-        ...state[dataType],
-        loading: false,
-        error: true,
+        ...state,
+        [dataType]: {
+          ...state[dataType],
+          refreshLoading: isRefreshRequest? false: state[dataType].refreshLoading,
+          loading: isRefreshRequest? state[dataType].loading: PULLUPLOAD.FAILURE,
+          error: true,
+        },
       };
       break;
     default:

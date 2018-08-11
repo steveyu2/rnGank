@@ -17,21 +17,34 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class rnGank extends Component {
+ class rnGank extends Component {
 
   componentDidMount() {
   }
   render() {
+    const {
+      mainColor,
+    } = this.props;
+
     return (
       <View style={styles.container}>
-        <StackNavigator onNavigationStateChange={(p,c)=>{
-          const prevRouteName = p.routes[p.index].routeName;
-          const currRouteName = c.routes[c.index].routeName;
-          if(prevRouteName !== currRouteName) {
-            console.log(prevRouteName,' --> ', currRouteName);
-          }
-        }}/>
+        <StackNavigator 
+          onNavigationStateChange={(p,c)=>{
+            const prevRouteName = p.routes[p.index].routeName;
+            const currRouteName = c.routes[c.index].routeName;
+            if(prevRouteName !== currRouteName) {
+              console.log(prevRouteName,' --> ', currRouteName);
+            }
+          }}
+          screenProps={{
+            mainColor,
+          }}
+        />
       </View>
     );
   }
 }
+
+export default connect(({ userSetting })=>({
+  mainColor: userSetting.mainColor,
+}))(rnGank);

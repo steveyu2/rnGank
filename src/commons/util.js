@@ -1,4 +1,6 @@
+import dayjs from 'dayjs';
 import { DEV } from  './constants';
+import i18n, { getLanguge }from './i18n';
 
 export const Console = {
   log: (...args) => {
@@ -71,6 +73,7 @@ export const Distribution = (function() {
             currentType = type;
           }
         },
+        getType: () => currentType,
       }
     }catch(err) {
       throw err;
@@ -112,3 +115,69 @@ export const delay = ms => {
     }
   });
 }
+
+export const timeMsg = (time) => {
+  try {
+    let currDate = +new Date;
+    time = new Date(time);
+    let interval= currDate - (+time);
+    const sixS = 60 * 1000;
+    const sixM = 60 * sixS;
+    const day = 24 * sixM;
+    const swday = 15 * day;
+  
+    if(interval <= sixS) {
+      return parseInt(interval / 1000) + i18n.secondsAgo;
+    } else if ( interval <= sixM ) {
+      return parseInt(interval/ sixS) + i18n.minutesAgo;
+    } else if ( interval <= day ) {
+      return parseInt(interval/ sixM) + i18n.hoursAgo;
+    } else if ( interval <= swday ) {
+      return parseInt(interval/ day) + i18n.daysAgo;
+    } else {
+      if(getLanguge() === 'en'){
+        return dayjs(time).format('MMM DD YYYY')
+      }
+      return `${time.getFullYear()}年${(time.getMonth()+1)}月${time.getDate()}日`;
+    }
+  } catch (err) {
+    console.log(err)
+    return time;
+  }
+}
+// 字符串截取
+export function cutstr(str, len) {
+  try{
+    var str_length = 0;
+    var str_len = 0;
+    str_cut = new String();
+    str_len = str.length;
+    for (var i = 0; i < str_len; i++) {
+      a = str.charAt(i);
+      str_length++;
+      if (escape(a).length > 4) {
+        //中文字符的长度经编码之后大于4
+        str_length++;
+      }
+      str_cut = str_cut.concat(a);
+      if (str_length >= len) {
+        str_cut = str_cut.concat("...");
+        return str_cut;
+      }
+    }
+    //如果给定字符串小于指定长度，则返回源字符串；
+    if (str_length < len) {
+      return str;
+    }
+  } catch(err) {
+    return str;
+  }
+}
+
+export const randomColor = () => {
+  let color = '';
+  while(color.length < 7) {
+    color = '#'+Math.floor(Math.random()*16777215).toString(16);
+  }
+  return color;
+};

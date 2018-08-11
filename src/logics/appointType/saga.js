@@ -30,8 +30,9 @@ function* appointTypeData(action) {
     // 刷新
     if(loadType === APPOINT_TYPE.REFRESH){
       yield put(refreshAppointTypeData(dataType, results));
+    } else {
+      yield put(fetchAppointTypeDataSuccess(dataType, results));
     }
-    yield put(fetchAppointTypeDataSuccess(dataType, results));
   } catch(err) {
     Console.error(err);
     yield put(fetchAppointTypeDataFailure(err, response));

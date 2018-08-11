@@ -15,12 +15,23 @@ import LoadingView from '../../components/loadingView';
 // import { gankio } from './commons/Api';
 // import { FONT_SIZE } from './commons/constants';
 
+const viewImgHtml = url => `<html lang="en"><head>    <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />      <style>   
+       html,body {       height: 100%;  
+  margin: 0;
+padding: 0;          width: 100%;        }    </style></head><body>  
+  <image id="img" src='${url}' width="100%"/></body></html>`;
+
 class WebViewStack extends Component {
 
-  static navigationOptions = ({ navigation, mainColor }) => ({
+  static navigationOptions = ({
+    navigation,
+    navigation: { getParam },
+    screenProps: {mainColor},
+  }) => ({
     header: (
       <NavigateHeader 
-        title="WebView" 
+        title={getParam('title', "WebView")} 
         navigation={navigation} 
         mainColor={mainColor}
       />
@@ -56,12 +67,24 @@ class WebViewStack extends Component {
   render() {
     const {
       mainColor,
-      navigation
+      navigation: {getParam}
     } = this.props;
     const {
       loading,
       error,
     } = this.state;
+
+    const url = this.props.navigation.getParam('url', '');
+    const viewImage = this.props.navigation.getParam('viewImage', false);
+    let addProps = {
+      source: {uri: url},
+    };
+
+    if(viewImage) {
+      addProps = {
+        source: {html: viewImgHtml(url)},
+      };
+    }
 
     return (
       <View style={styles.container}>
@@ -83,9 +106,9 @@ class WebViewStack extends Component {
           />
         )}
         <WebView
-          source={{uri: 'https://github.com/facebook/react-native'}}
           onLoad={this.setLoadingEnd}
           onError={this.setLoadingError}
+          {...addProps}
         />
       </View>
     );

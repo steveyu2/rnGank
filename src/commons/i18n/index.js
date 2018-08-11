@@ -10,4 +10,5 @@ const i18n = Distribution({
 });
 
 export const setLanguge = (...args) => i18n.setType(...args);
+export const getLanguge = (...args) => i18n.getType(...args);
 export default i18n.data;

@@ -55,7 +55,6 @@ class NavigateHeader extends PureComponent{
       <View style={[ styles.container, addStyle.container]}>
         <View style={styles.leftWrap}>
           {backBtn && this.backBtn({ navigation, btnColor })}
-          <HeaderButton name="md-menu"/>
           {leftComponent && leftComponent}
           {titleAlign === 'left' && <Text style={styles.title}>{title}</Text>}
         </View>
@@ -63,7 +62,6 @@ class NavigateHeader extends PureComponent{
         <View style={styles.rightWrap}>
           {titleAlign === 'right' && <Text style={styles.title}>{title}</Text>}
           {rightComponent && rightComponent}
-          <HeaderButton/>
         </View>
       </View>
     );

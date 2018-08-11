@@ -22,9 +22,8 @@ const contentType = {
 };
 
 const request = options => {
-  return axios(options).catch(v => {
-    Console.error(v)
-  });
+  Console.log(options.url);
+  return axios(options);
 }
 
 class Api {

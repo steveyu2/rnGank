@@ -5,6 +5,7 @@ import {
   Text,
 } from 'react-native';
 import Spinkit from 'react-native-spinkit';
+import { Icon } from 'react-native-elements';
 import { adaptUnits, FONT_SIZE } from '../commons/constants';
 import { parseColorToRgba } from '../commons/util';
 import * as Animatable from 'react-native-animatable';
@@ -24,18 +25,24 @@ class LoadingView extends PureComponent{
 
   render() {
     const {
-      style,
-      loadingStyle,
+      style={},
+      loadingStyle={},
       text,
       fullScreen=false,
-      color="#000",
-      textColor="#444",
-      size=40,
+      textColor='#444',
+      textSize= FONT_SIZE.SM,
       _ref=()=>{},
+      infoIconName,
+      infoIconType='ionicon',
     } = this.props;
     let {
-      type="1",
+      loadingType="1",
+      color='#000',
+      size = adaptUnits(40, 'F'),
     } = this.props;
+    let compView;
+
+    loadingType = parseInt(loadingType);
 
     // 附加样式
     const addStyle = {
@@ -43,8 +50,7 @@ class LoadingView extends PureComponent{
       loadingContainer: {},
     }
 
-    type = parseInt(type);
-
+    // 全屏
     if(fullScreen) {
       addStyle.container = {
         height: '100%',
@@ -52,6 +58,60 @@ class LoadingView extends PureComponent{
       addStyle.loadingContainer = {
         marginTop: adaptUnits(-300 ,'H'),
       };
+    }
+
+    if(color.length <= 7) {
+      color = parseColorToRgba(color, 1, {R: -33, G: -15, B: 0});
+    }
+
+    if(!infoIconName) {
+      compView = (
+        <View
+          style={[
+          styles.loadingContainer,
+          addStyle.loadingContainer,
+          loadingStyle,
+          ]}
+        >
+          <Spinkit
+            color={color}
+            size={size}
+            type={this.loadingType[loadingType - 1]}
+          />
+          {text && (
+            <Text
+            style={[
+              styles.loadingText,
+              {color: textColor, fontSize: textSize}
+            ]}
+            >{text}</Text>
+          )}
+        </View>);
+    } else {
+      size = adaptUnits(18, 'F'),
+      compView = (
+        <View
+          style={[
+          styles.infoContainer,
+          addStyle.loadingContainer,
+          loadingStyle,
+          ]}
+        >
+          <Icon
+            size={size}
+            color={color}
+            type={infoIconType}
+            name={infoIconName}
+          />
+          {text && (
+            <Text
+            style={[
+              styles.infoText,
+              {color: textColor, fontSize: textSize}
+            ]}
+            >{text}</Text>
+          )}
+        </View>);
     }
 
     return (
@@ -63,29 +123,7 @@ class LoadingView extends PureComponent{
         ]}
         ref={_ref}
       >
-        <View
-          style={[
-            styles.loadingContainer,
-            addStyle.loadingContainer,
-            loadingStyle,
-            ]}
-        >
-          <Spinkit
-            color={parseColorToRgba(color, 1, {R: -33, G: -15, B: 0})}
-            size={size}
-            type={this.loadingType[type - 1]}
-          />
-          {text && (
-            <Text
-              style={[
-                styles.loadingText,
-                {color: textColor}
-              ]}
-            >
-                {text}
-            </Text>
-          )}
-        </View>
+        { compView }
       </Animatable.View>
     );
   }
@@ -95,16 +133,24 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255,255,255, 0)',
   },
   loadingContainer: {
     alignItems: 'center',
-    // backgroundColor: 'red',
   },
   loadingText: {
     marginTop: adaptUnits(15 ,'H'),
-    fontSize: FONT_SIZE.SM,
-  }
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: adaptUnits(25 ,'W'),
+    paddingBottom: adaptUnits(25 ,'W'),
+  },
+  infoText: {
+    marginLeft: adaptUnits(10 ,'W'),
+  },
 });
 
 export default LoadingView;
