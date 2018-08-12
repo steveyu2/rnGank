@@ -1,5 +1,5 @@
 import { defineAction } from 'redux-define';
-import { SUCCESS, FAILURE, REQUEST, REFRESH, APPNAME } from './constants';
+import { SUCCESS, FAILURE, REQUEST, REFRESH, LOCAL_LOAD, APPNAME } from './constants';
 
 const namespace = APPNAME;
 const GANK = defineAction('GANK', [], namespace);
@@ -13,4 +13,4 @@ export const APPOINT_DAY = defineAction('APPOINT_DAY', [SUCCESS, FAILURE, REQUES
 // 搜索数据 
 export const SEARCH_TYPE = defineAction('APPOINT_DAY', [SUCCESS, FAILURE, REQUEST, REFRESH], GANK);
 // 设置 
-export const USER_SETTING = defineAction('USER_SETTING', [SUCCESS, FAILURE, REQUEST], GANK);
+export const USER_SETTING = defineAction('USER_SETTING', [SUCCESS, FAILURE, REQUEST, LOCAL_LOAD], GANK);

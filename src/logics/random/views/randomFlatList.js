@@ -7,8 +7,9 @@ import gankRenderItems from '../../../components/gankRenderItems';
 import LoadingView from '../../../components/loadingView';
 import { gankio } from '../../../commons/Api';
 import { RANDOM } from '../../../commons/actionTypes';
+import theme from '../../../commons/theme';
 import * as randomAction from '../action';
-import { propsDiff } from '../../selector';
+// import { propsDiff } from '../../selector';
 
 class RandomFlatList extends Component {
   constructor(props) {
@@ -20,9 +21,9 @@ class RandomFlatList extends Component {
     this._onEndReached = this._onEndReached.bind(this);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return propsDiff(this.props, nextProps)
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   return propsDiff(this.props, nextProps)
+  // }
 
   _keyExtractor  = data => data._id;
 
@@ -93,13 +94,16 @@ class RandomFlatList extends Component {
       ?<LoadingView
         fullScreen
         infoIconName="ios-alert"
-        color={mainColor}
+        color={theme.blackText.color || mainColor}
+        iconColor={theme.lightText.color || mainColor}
+        btnBackgroundColor={theme.blackText.color || mainColor}
         text="加载失败了"
         textAlign="left"
         btnText="重试"
+        textColor={theme.lightText.color || '#444'}
         btnOnPress={this._onEndReached}
       />
-      :<LoadingView fullScreen color={mainColor}/>
+      :<LoadingView fullScreen color={theme.lightText.color || mainColor}/>
       :<FlatList
         style={ styles.container }
         mainColor={ mainColor }

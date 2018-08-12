@@ -56,8 +56,11 @@ class ScrollViewFooter extends PureComponent{
     const {
       state,
       mainColor,
+      iconColor,
+      textColor,
       retry=()=>{},
     } = this.props;
+    
     if(state === PULLUPLOAD.NOMORE){
       return (
         <LoadingView
@@ -65,6 +68,8 @@ class ScrollViewFooter extends PureComponent{
           color={ mainColor }
           text="没有更多了"
           textAlign="right"
+          iconColor={iconColor}
+          textColor={textColor}
         />
       );
     }else if(state === PULLUPLOAD.FAILURE){
@@ -76,6 +81,8 @@ class ScrollViewFooter extends PureComponent{
           textAlign="right"
           btnText="重试"
           btnOnPress={retry}
+          iconColor={iconColor}
+          textColor={textColor}
         />
       );
     }else if(state === PULLUPLOAD.ING){
@@ -90,7 +97,7 @@ class ScrollViewFooter extends PureComponent{
     }
     return <LoadingView size={adaptUnits(25, 'F')}
       style={ styles.loadingWrap }
-      color="tgba(255,255,255,0)"
+      color="rgba(255,255,255,0)"
       loadingType="2"
     />;
   }

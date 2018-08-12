@@ -11,7 +11,8 @@ import {
 import Button from '../../components/button';
 import { timeMsg, cutstr, randomColor } from '../../commons/util';
 // import Lightbox from 'react-native-lightbox';
-import i18n from '../../commons/i18n';
+import i18n, { getLanguge } from '../../commons/i18n';
+import theme from '../../commons/theme';
 
 const WIDTH = SCREEN_WIDTH - SPACING * 2;
 const BORDER_RADIUS = 5;
@@ -51,34 +52,34 @@ export default class Android extends PureComponent{
     } = this.props;
 
     who = who || i18n.unknown;
-    publishedAt = timeMsg(publishedAt);
+    publishedAt = timeMsg(publishedAt, { getLanguge, i18n }, '-');
     who = cutstr(who, 10);
 
     return (
       <View style={styles.container}>
-        <View style={[styles.insideContainer, styles.raised]}>
+        <View style={[styles.insideContainer, styles.raised, theme.gankContainerStyle]}>
           <Button noAction onPress={this._onPress}>
-            <View style={styles.TopWrap}>
+            <View style={[styles.TopWrap]}>
               <Avatar
                 small
                 rounded
                 title={who[0]}
-                overlayContainerStyle={{backgroundColor: this.randomColor}}
+                overlayContainerStyle={{backgroundColor: theme.gankIconStyle.color || this.randomColor}}
               />
-              <Text style={[styles.title]}>{desc}</Text>
+              <Text style={[styles.title, {color: theme.gankTextStyle.color || '#000'}]}>{desc}</Text>
             </View>
-            <View style={styles.bottomWrap}>
-              <Text style={{fontSize: FONT_SIZE.XXXS }}>
+            <View style={[styles.bottomWrap, theme.gankBottomContainerStyle]}>
+              <Text style={[{fontSize: FONT_SIZE.XXXS}, {color: theme.gankTextStyle.color || '#000'}]}>
                 发布者:  
                 <Text style={{fontSize: FONT_SIZE.XS }}>{who}</Text>
               </Text>
               <View style={styles.bottomRightWrap}>
                 <Badge
                   value={type}
-                  containerStyle={[styles.bottomRightBadge, {backgroundColor: mainColor}]}
+                  containerStyle={[styles.bottomRightBadge, {backgroundColor: theme.gankBadgeStyle.color || mainColor}]}
                   textStyle={styles.bottomRightBadgeText}
                 />
-                <Text style={styles.bottomRightTime}>{publishedAt}</Text>
+                <Text style={[styles.bottomRightTime, {color: theme.gankTextStyle.color || '#000'}]}>{publishedAt}</Text>
               </View>
             </View>
           </Button>
@@ -98,6 +99,7 @@ const styles = StyleSheet.create({
   insideContainer: {
     width: WIDTH,
     borderRadius: BORDER_RADIUS,
+    backgroundColor: '#fff',
   },
   raised: {
     ...Platform.select({
@@ -126,20 +128,22 @@ const styles = StyleSheet.create({
   },
   TopWrap: {
     width: WIDTH,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderWidth: 0,
     borderTopLeftRadius: BORDER_RADIUS,
     borderTopRightRadius: BORDER_RADIUS,
     paddingTop: SPACING / 2,
+    paddingBottom: SPACING / 2,
     paddingLeft: SPACING / 1.5,
     paddingRight: SPACING / 1.5,
   },
   bottomWrap: {
-    height: adaptUnits(50, 'H'),
+    height: adaptUnits(45, 'H'),
     width: WIDTH,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

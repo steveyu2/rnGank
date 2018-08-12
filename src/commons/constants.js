@@ -2,6 +2,7 @@ import { Platform, StatusBar, Dimensions, PixelRatio } from "react-native";
 import { Header } from 'react-navigation';
 // import { isIphoneX } from "react-native-iphone-x-helper";
 
+export const DEV = false;
 
 const baseScreenHeight = 1280;
 const baseScreenWidth = 720;
@@ -51,13 +52,12 @@ export const FONT_SIZE = {
   XXXXXXS: adaptUnits(6, 'F'),
 };
 
-export const DEV = false;
-
 export const REQUEST = 'REQUEST';
-export const SUCCESS = 'SUCCESS'; 
-export const FAILURE = 'FAILURE'; 
+export const SUCCESS = 'SUCCESS';
+export const FAILURE = 'FAILURE';
 export const REFRESH = 'REFRESH';
-export const LOADING = 'LOADING'; 
+export const LOADING = 'LOADING';
+export const LOCAL_LOAD = 'LOCAL_LOAD';
 
 export const APPNAME = 'rnGank';
 // stack screens
@@ -72,5 +72,10 @@ SCREENS.D = [
   'RANDOM',
   'SKILL',
   'LEISURE',
+  'SETTING',
+  // 'ABOUTUS',
 ].reduce((a, b) => ({...a, [b]: b + '_drawer'}), {});
 
+export const STORAGE_KEYS = [
+  'userSetting',
+].reduce((a, b) => ({...a, [b]: b}), {});

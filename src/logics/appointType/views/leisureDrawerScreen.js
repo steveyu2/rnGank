@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Immutable from 'immutable';
 // import { FONT_SIZE, adaptUnits } from '../../../commons/constants';
 import i18n from '../../../commons/i18n';
+import theme from '../../../commons/theme';
 import ScrollableTabView from '../../../components/ScrollableTabView';
 import DrawerNavigateHeader from '../../../components/drawerNavigateHeader';
 import { gankio } from '../../../commons/Api';
@@ -13,11 +14,11 @@ import { propsDiff } from '../../selector';
 
 class LeisureDrawerScreen extends Component{
 
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({ navigation, screenProps: {i18n} }) => ({
     drawerLabel: i18n.leisure,
     drawerIcon: ({ focused, tintColor }) => (
       <Icon
-        name="logo-codepen"
+        name="ios-color-palette"
         type="ionicon"
         color={focused? tintColor: '#000'}
       />
@@ -37,9 +38,9 @@ class LeisureDrawerScreen extends Component{
     };
   }
 
-  shouldComponentUpdate(nextProps) {
-    return propsDiff(this.props, nextProps)
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   return propsDiff(this.props, nextProps)
+  // }
 
   tabContent() {
     const {
@@ -70,11 +71,11 @@ class LeisureDrawerScreen extends Component{
     } = this.props;
 
     return (
-      <View style={[styles.container, {backgroundColor: bgColor}]}>
+      <View style={[styles.container, {backgroundColor: bgColor}, theme.container]}>
         <DrawerNavigateHeader 
           title={i18n.leisure}
           navigation={navigation} 
-          mainColor={mainColor}
+          mainColor={theme.container.backgroundColor || mainColor}
         />
         <ScrollableTabView
           style={styles.tabView}

@@ -15,12 +15,13 @@ import Api, { gankio } from '../../commons/Api';
 import { getAppointType } from '../select';
 
 function* appointTypeData(action) {
-  try {
-    let results;
     const { dataType, loadType } = action.payload;
+    let results;
+    let response;
+  try {
     const { page, limit } = yield select(getAppointType, dataType);
 
-    const response = yield call(Api.fetchAppointTypeData, dataType, limit, page - 1);
+    response = yield call(Api.fetchAppointTypeData, dataType, limit, page - 1);
 
     if(response.status !== 200 || response.data.error) {
       yield put(fetchAppointTypeDataFailure(dataType, response, ""));

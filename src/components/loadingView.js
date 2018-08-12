@@ -26,25 +26,32 @@ class LoadingView extends PureComponent{
 
   render() {
     const {
-      text,
-      btnText, 
-      infoIconName,
-      infoIconType='ionicon',
       style={},
       loadingStyle={},
+      infoIconName,
+      infoIconType='ionicon',
       fullScreen=false,
+      text,
       textColor='#444',
       textSize = FONT_SIZE.SM,
       textAlign = 'bottom', // right
+      btnText,
+      btnTextColor = '#fff',
+      btnBackgroundColor,
       btnOnPress = () => {}, 
       _ref=()=>{},
     } = this.props;
+
+    console.log(this.props)
+
     let {
       loadingType="1",
       color='#000',
+      iconColor = color,
       size = adaptUnits(40, 'F'),
     } = this.props;
     let compView;
+    // const iconColor = color;
 
     loadingType = parseInt(loadingType);
 
@@ -104,7 +111,7 @@ class LoadingView extends PureComponent{
         >
           <Icon
             size={size}
-            color={color}
+            color={iconColor}
             type={infoIconType}
             name={infoIconName}
           />
@@ -117,10 +124,10 @@ class LoadingView extends PureComponent{
             >{text}</Text>
           )}
           {btnText && (
-            <Button style={[styles.btnWrap, {backgroundColor: color,}]} onPress={btnOnPress}>
+            <Button style={[styles.btnWrap, {backgroundColor: btnBackgroundColor || color,}]} onPress={btnOnPress}>
               <Text
                 style={[
-                  {color: '#fff', fontSize: textSize}
+                  {color: btnTextColor, fontSize: textSize}
                 ]}
               >
                 {btnText}

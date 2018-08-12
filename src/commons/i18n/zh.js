@@ -20,4 +20,13 @@ export default {
   leisure: '休闲',
   skill: '技术',
   dayNew: '每日最新',
+  chinese: '中文',
+  japanese: '日本語',
+  english: 'English',
+  mainColor: '主色调',
+  normalMode: '普通',
+  nightMode: '夜间',
+  blue: '蓝色',
+  red: '红色',
+  black: '黑色',
 };

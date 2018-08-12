@@ -16,12 +16,13 @@ import { PULLUPLOAD } from '../../components/pullUploading';
 import { getRandomLimit } from '../select';
 
 function* randomData(action) {
+  const { dataType, loadType } = action.payload;
+  let response;
+  let results;
   try {
-    let results;
-    const { dataType, loadType } = action.payload;
     const limit = yield select(getRandomLimit, dataType);
 
-    const response = yield call(Api.fetchRandomData, dataType, limit);
+    response = yield call(Api.fetchRandomData, dataType, limit);
 
     if(response.status !== 200 || response.data.error) {
       yield put(fetchRandomDataFailure(dataType, response, ""));
@@ -32,7 +33,7 @@ function* randomData(action) {
     yield put(fetchRandomDataSuccess(loadType, dataType, results));
   } catch(err) {
     Console.log(err);
-    yield put(fetchRandomDataFailure(dataType, response, err));
+  yield put(fetchRandomDataFailure(dataType, response, err));
   }
 }
 

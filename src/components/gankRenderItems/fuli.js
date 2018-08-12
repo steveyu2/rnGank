@@ -10,7 +10,8 @@ import {
 } from '../../commons/constants';
 import Button from '../../components/button';
 import { timeMsg, cutstr } from '../../commons/util';
-import i18n from '../../commons/i18n';
+import i18n, { getLanguge } from '../../commons/i18n';
+import theme from '../../commons/theme';
 // import Lightbox from 'react-native-lightbox';
 
 const WIDTH = SCREEN_WIDTH - SPACING * 2;
@@ -45,7 +46,7 @@ export default class fuli extends PureComponent{
       who=i18n.unknown,
     } = this.props;
 
-    publishedAt = timeMsg(publishedAt);
+    publishedAt = timeMsg(publishedAt, { getLanguge, i18n }, '-');
     who = cutstr(who, 10);
 
     return (
@@ -61,7 +62,26 @@ export default class fuli extends PureComponent{
                 resizeMode="cover"
                 style={styles.image}
             />
-            <View style={styles.bottomWrap}>
+            <View style={[styles.bottomWrap, theme.gankBottomContainerStyle]}>
+              <Text style={[{fontSize: FONT_SIZE.XXXS}, {color: theme.gankTextStyle.color || '#000'}]}>
+                发布者:  
+                <Text style={{fontSize: FONT_SIZE.XS }}>{who}</Text>
+              </Text>
+              <View style={styles.bottomRightWrap}>
+                <Badge
+                  value={desc}
+                  containerStyle={[styles.bottomRightBadge, {backgroundColor: theme.gankBadgeStyle.color || mainColor}]}
+                  textStyle={styles.bottomRightBadgeText}
+                />
+                <Badge
+                  value={type}
+                  containerStyle={[styles.bottomRightBadge, {backgroundColor: theme.gankBadgeStyle.color || mainColor}]}
+                  textStyle={styles.bottomRightBadgeText}
+                />
+                <Text style={[styles.bottomRightTime, {color: theme.gankTextStyle.color || '#000'}]}>{publishedAt}</Text>
+              </View>
+            </View>
+            {/* <View style={styles.bottomWrap}>
               <Text style={{fontSize: FONT_SIZE.XXXS }}>
                 发布者: 
                 <Text style={{fontSize: FONT_SIZE.XS }}>{who}</Text>
@@ -79,7 +99,7 @@ export default class fuli extends PureComponent{
                 />
                 <Text style={styles.bottomRightTime}>{publishedAt}</Text>
               </View>
-            </View>
+            </View> */}
           </Button>
         </View>
       </View>

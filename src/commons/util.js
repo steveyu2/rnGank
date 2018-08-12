@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import { DEV } from  './constants';
-import i18n, { getLanguge }from './i18n';
 
 export const Console = {
   log: (...args) => {
@@ -13,7 +12,7 @@ export const Console = {
   }
 }
 
-// 16进制颜色转rgba 
+// 16进制颜色转rgba `
 export const parseColorToRgba = (color, opacity = 1, {R=0, G=0, B=0}) => {
   try{
     color = color.split("#")[1];
@@ -34,12 +33,13 @@ export const parseColorToRgba = (color, opacity = 1, {R=0, G=0, B=0}) => {
     return `rgba(${color},${opacity})`;
   } catch(err) {
     Console.log("func parseColorToRgba error: ",err)
+    return 'rgba(0,0,0, 1)';
   }
 }
 
 // 分配器
 export const Distribution = (function() {
-  const init = data => {
+  const init = (data, defaultResult="") => {
     let TYPES = [];
     let currentType = '';
     let rootData = {};
@@ -56,7 +56,7 @@ export const Distribution = (function() {
         Object.keys(rootData[v]).forEach(_v => {
           if(!tempObj[_v])
             tempObj[_v] = {
-              get: function(){return rootData[currentType][_v];},
+              get: function(){return rootData[currentType][_v] || defaultResult;},
               set: function(val){ throw new Error("Distribution Obj set error: cannot set Distribution obj attr :)") }
             }
         });
@@ -116,7 +116,7 @@ export const delay = ms => {
   });
 }
 
-export const timeMsg = (time) => {
+export const timeMsg = (time, { i18n, getLanguge }, defaultResult) => {
   try {
     let currDate = +new Date;
     time = new Date(time);
@@ -142,7 +142,7 @@ export const timeMsg = (time) => {
     }
   } catch (err) {
     console.log(err)
-    return time;
+    return defaultResult;
   }
 }
 // 字符串截取
@@ -186,12 +186,16 @@ export const randomColor = () => {
 export const arrayUnique = (currArr, key=v=>v) => {
   let arr = []; 　　 //创建一个临时数组
   let obj = {}; 　　//创建一个空对象
-  debugger
+
   for(let i = 0, k; i < currArr.length; i++){ 　　//遍历当前要去重的数组
    k = key(currArr[i]);
    if(!obj[k]){  　//判断obj对象中是否存有当前项，没有则执行
     arr.push(currArr[i]); 　　//将当前项push到临时数组中
     obj[k] = 1; 　　//将当前项存入obj对象
+   } else {
+    //  console.log(currArr)
+    //  console.log(currArr[i])
+    //  debugger
    }
   }
   return arr;

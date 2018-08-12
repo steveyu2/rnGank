@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
-import Immutable from 'immutable';
+// import Immutable from 'immutable';
 // import { FONT_SIZE, adaptUnits } from '../../../commons/constants';
 import i18n from '../../../commons/i18n';
+import theme from '../../../commons/theme';
 import ScrollableTabView from '../../../components/ScrollableTabView';
 import DrawerNavigateHeader from '../../../components/drawerNavigateHeader';
 import { gankio } from '../../../commons/Api';
@@ -13,7 +14,7 @@ import { propsDiff } from '../../selector';
 
 class RandomDrawer extends Component{
 
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({ navigation, screenProps: {i18n} }) => ({
     drawerLabel: i18n.randomRecommendation,
     drawerIcon: ({ focused, tintColor }) => (
       <Icon
@@ -44,9 +45,9 @@ class RandomDrawer extends Component{
     };
   }
 
-  shouldComponentUpdate(nextProps) {
-    return propsDiff(this.props, nextProps)
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   return propsDiff(this.props, nextProps)
+  // }
 
   tabContent() {
     const {
@@ -77,15 +78,15 @@ class RandomDrawer extends Component{
     } = this.props;
 
     return (
-      <View style={[styles.container, {backgroundColor: bgColor}]}>
+      <View style={[styles.container, {backgroundColor: bgColor}, theme.container]}>
         <DrawerNavigateHeader 
           title={i18n.randomRecommendation}
-          navigation={navigation} 
-          mainColor={mainColor}
+          navigation={navigation}
+          mainColor={theme.container.backgroundColor || mainColor}
         />
         <ScrollableTabView
           style={styles.tabView}
-          mainColor={mainColor}
+          mainColor={mainColor} 
         >
           {this.tabContent()}
         </ScrollableTabView>

@@ -1881,7 +1881,7 @@ fbjs-scripts@^0.7.0:
     semver "^5.1.0"
     through2 "^2.0.0"
 
-fbjs@^0.8.0, fbjs@^0.8.16, fbjs@^0.8.9, fbjs@~0.8.9:
+fbjs@^0.8.0, fbjs@^0.8.9, fbjs@~0.8.9:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   dependencies:
@@ -3158,10 +3158,6 @@ load-json-file@^2.0.0:
     pify "^2.0.0"
     strip-bom "^3.0.0"
 
-localized-strings@^0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/localized-strings/-/localized-strings-0.0.11.tgz#96ccab4bd1855a850f3099dc78e1b61423f6cecd"
-
 locate-path@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-2.0.0.tgz#2b568b265eec944c6d9c0de9c3dbbbca0354cd8e"
@@ -4112,13 +4108,6 @@ react-lifecycles-compat@^3, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
-react-localization@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/react-localization/-/react-localization-1.0.10.tgz#fdb5cfb88bf4bd70ec2109bb425d5408789fe704"
-  dependencies:
-    localized-strings "^0.0.11"
-    react "^16.0.0"
-
 react-native-animatable@1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.2.4.tgz#b5fb7657e8f6edadbc26697057a327fb920b3039"
@@ -4164,19 +4153,6 @@ react-native-iphone-x-helper@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.3.tgz#7a2f1e0574e899a0f1d426e6167fd98990083214"
 
-react-native-lightbox@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/react-native-lightbox/-/react-native-lightbox-0.7.0.tgz#e52b4d7fcc141f59d7b23f0180de535e35b20ec9"
-  dependencies:
-    prop-types "^15.5.10"
-
-react-native-localization@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/react-native-localization/-/react-native-localization-1.0.11.tgz#1f1b00e0c7cb1b9167c7def8a83519492b75d5c2"
-  dependencies:
-    react "^16.0.0"
-    react-localization "^1.0.10"
-
 react-native-picker@^4.3.7:
   version "4.3.7"
   resolved "https://registry.yarnpkg.com/react-native-picker/-/react-native-picker-4.3.7.tgz#9842e8c62ff0d8b676e9514d9f9172413c0518a8"
@@ -4210,6 +4186,10 @@ react-native-spinkit@^1.1.1:
 react-native-splash-screen@3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-3.1.0.tgz#9636f83d711dadded27167cdc3dc6aa98ec222ee"
+
+react-native-storage@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-storage/-/react-native-storage-0.2.2.tgz#4449197f122b2da0650e3704e1f050260ed58d9f"
 
 react-native-swiper@^1.5.13:
   version "1.5.13"
@@ -4404,15 +4384,6 @@ react@16.0.0-alpha.6:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react@^16.0.0:
-  version "16.4.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
-  dependencies:
-    fbjs "^0.8.16"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.0"
-
 read-pkg-up@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-1.0.1.tgz#9d63c13276c065918d57f002a57f40a1b643fb02"
@@ -4498,6 +4469,10 @@ redux-logger@^3.0.6:
   resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
   dependencies:
     deep-diff "^0.3.5"
+
+redux-persist@^5.10.0:
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.10.0.tgz#5d8d802c5571e55924efc1c3a9b23575283be62b"
 
 redux-saga@^0.16.0:
   version "0.16.0"

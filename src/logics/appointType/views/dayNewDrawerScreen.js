@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Immutable from 'immutable';
 // import { FONT_SIZE, adaptUnits } from '../../../commons/constants';
 import i18n from '../../../commons/i18n';
+import theme from '../../../commons/theme';
 import ScrollableTabView from '../../../components/ScrollableTabView';
 import DrawerNavigateHeader from '../../../components/drawerNavigateHeader';
 import { gankio } from '../../../commons/Api';
@@ -12,12 +13,12 @@ import AppointTypeFlatList from './appointTypeFlatList';
 import { propsDiff } from '../../selector';
 
 class DayNewDrawerScreen extends Component{
-
-  static navigationOptions = ({ navigation }) => ({
+  i18n
+  static navigationOptions = ({ navigation, screenProps: {i18n} }) => ({
     drawerLabel: i18n.dayNew,
     drawerIcon: ({ focused, tintColor }) => (
       <Icon
-        name="logo-codepen"
+        name="md-calendar"
         type="ionicon"
         color={focused? tintColor: '#000'}
       />
@@ -36,9 +37,9 @@ class DayNewDrawerScreen extends Component{
     };
   }
 
-  shouldComponentUpdate(nextProps) {
-    return propsDiff(this.props, nextProps)
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   return propsDiff(this.props, nextProps)
+  // }
 
   tabContent() {
     const {
@@ -67,15 +68,21 @@ class DayNewDrawerScreen extends Component{
       bgColor,
       navigation,
     } = this.props;
-
+    
     return (
-      <View style={[styles.container, {backgroundColor: bgColor}]}>
+      <View style={[styles.container, {backgroundColor: bgColor}, theme.container]}>
         <DrawerNavigateHeader 
           title={i18n.dayNew}
           navigation={navigation} 
-          mainColor={mainColor}
+          mainColor={theme.container.backgroundColor || mainColor}
         />
-        {this.tabContent()}
+        <ScrollableTabView
+          style={styles.tabView}
+          mainColor={mainColor}
+          tabHeight={0}
+        >
+          {this.tabContent()}
+        </ScrollableTabView>
       </View>
     )
   }

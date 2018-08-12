@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Immutable from 'immutable';
 // import { FONT_SIZE, adaptUnits } from '../../../commons/constants';
 import i18n from '../../../commons/i18n';
+import theme from '../../../commons/theme';
 import ScrollableTabView from '../../../components/ScrollableTabView';
 import DrawerNavigateHeader from '../../../components/drawerNavigateHeader';
 import { gankio } from '../../../commons/Api';
@@ -13,7 +14,7 @@ import { propsDiff } from '../../selector';
 
 class SkillDrawerScreen extends Component{
 
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({ navigation, screenProps: {i18n} }) => ({
     drawerLabel: i18n.skill,
     drawerIcon: ({ focused, tintColor }) => (
       <Icon
@@ -41,9 +42,9 @@ class SkillDrawerScreen extends Component{
     };
   }
 
-  shouldComponentUpdate(nextProps) {
-    return propsDiff(this.props, nextProps)
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   return propsDiff(this.props, nextProps)
+  // }
 
   tabContent() {
     const {
@@ -60,7 +61,6 @@ class SkillDrawerScreen extends Component{
           dataType={this.dataType[v]}
           dataGankType={gankio.type[this.dataType[v]]}
           tabLabel={i18n[v]}
-          navigation={navigation}
         />
       );
     });
@@ -74,11 +74,11 @@ class SkillDrawerScreen extends Component{
     } = this.props;
 
     return (
-      <View style={[styles.container, {backgroundColor: bgColor}]}>
+      <View style={[styles.container, {backgroundColor: bgColor}, theme.container]}>
         <DrawerNavigateHeader 
           title={i18n.skill}
-          navigation={navigation} 
-          mainColor={mainColor}
+          navigation={navigation}
+          mainColor={theme.container.backgroundColor || mainColor}
         />
         <ScrollableTabView
           style={styles.tabView}

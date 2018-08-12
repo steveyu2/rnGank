@@ -1,5 +1,5 @@
 export default {
-  randomRecommendation: 'randomRecommendation',
+  randomRecommendation: 'randomRecommend',
   languge: 'languge',
   theme: 'theme',
   setting: 'setting',
@@ -20,4 +20,13 @@ export default {
   leisure: 'leisure',
   skill: 'technology',
   dayNew: 'Daily updated',
+  chinese: '中文',
+  japanese: '日本語',
+  english: 'English',
+  mainColor: 'main color',
+  normalMode: 'normal',
+  nightMode: 'night',
+  blue: 'blue',
+  red: 'red',
+  black: 'black',
 };
