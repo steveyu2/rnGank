@@ -18,7 +18,7 @@ rnGank是又一个react native开发的gank.io的App。
 
 ### 界面
 
-  <img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r1.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r2.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r3.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r4.png"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r5.png"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r6.png"/>
+  <img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r1.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r2.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r3.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r4.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r5.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r6.gif"/>
 
 ### 感谢
 
