@@ -32,7 +32,7 @@ function* appointTypeData(action) {
     yield put(fetchAppointTypeDataSuccess(loadType, dataType, results));
   } catch(err) {
     Console.error(err);
-    yield put(fetchAppointTypeDataFailure(err, response));
+    yield put(fetchAppointTypeDataFailure(dataType, response, err));
   }
 }
 

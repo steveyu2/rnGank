@@ -141,7 +141,7 @@ export const timeMsg = (time, { i18n, getLanguge }, defaultResult) => {
       return `${time.getFullYear()}年${(time.getMonth()+1)}月${time.getDate()}日`;
     }
   } catch (err) {
-    console.log(err)
+    Console.log(err)
     return defaultResult;
   }
 }

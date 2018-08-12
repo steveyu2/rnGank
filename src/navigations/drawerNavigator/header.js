@@ -25,7 +25,7 @@ class DrawerNavigatorHeader extends PureComponent{
           source={avatar}
           containerStyle={styles.avatar}
           activeOpacity={0.7}
-          onPress={() => console.log("Works!")}
+          // onPress={() => console.log("Works!")}
         />
         <View style={styles.bottomWrap}>
           <Text style={[styles.bottomText, {fontSize: FONT_SIZE.XS}]}>Pixiv Id: 45525123</Text>

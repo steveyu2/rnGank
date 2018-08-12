@@ -42,8 +42,6 @@ class LoadingView extends PureComponent{
       _ref=()=>{},
     } = this.props;
 
-    console.log(this.props)
-
     let {
       loadingType="1",
       color='#000',

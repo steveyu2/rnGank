@@ -1,8 +1,7 @@
-import { parseColorToRgba } from '../util';
+import { parseColorToRgba, Console } from '../util';
 
 const black = '#393939';
 
-console.log(black)
 const lightBlack = parseColorToRgba(black, 1, {R: -40,G: -40,B: -40});
 const color1 = '#888';
 const color2 = '#eee';

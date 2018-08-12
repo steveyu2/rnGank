@@ -7,10 +7,12 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
+import { Console } from './commons/util';
 import StackNavigator from './navigations/stackNavigator';
 import * as userSettingAction from './logics/userSetting/action';
 import i18n from './commons/i18n';
 import theme from './commons/theme';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
             const prevRouteName = p.routes[p.index].routeName;
             const currRouteName = c.routes[c.index].routeName;
             if(prevRouteName !== currRouteName) {
-              console.log(prevRouteName,' --> ', currRouteName);
+              Console.log(prevRouteName,' --> ', currRouteName);
             }
           }}
           screenProps={{

@@ -81,7 +81,7 @@ class AppointTypeFlatList extends Component {
       dataGankType,
       data,
     } = this.props;
-
+    
     const currentData = data[dataGankType];
     const extraData = {
       data: [...currentData.data],
