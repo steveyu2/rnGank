@@ -18,10 +18,10 @@ rnGank是又一个react native开发的gank.io的App。
 
 ### 界面
 
-  <img height="300" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r1.gif"/>
-  <img height="300" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r2.gif"/>
-  <img height="300" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r3.gif"/>
-  <img height="300" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r4.png"/>
+  <img width="300" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r1.gif"/>
+  <img width="300" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r2.gif"/>
+  <img width="300" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r3.gif"/>
+  <img width="300" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r4.png"/>
 
 ### 感谢
 
