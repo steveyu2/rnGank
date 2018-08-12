@@ -2,36 +2,39 @@ import { APPOINT_TYPE } from '../../commons/actionTypes';
 
 export function fetchAppointTypeData(dataType, loadType) {
   return {
-    type: APPOINT_TYPE.REQUEST,
+    type: `${APPOINT_TYPE.REQUEST}_${dataType}`,
     payload: {
       dataType,
       loadType,
     },
   }
 }
-export function refreshAppointTypeData(dataType, data) {
+export function refreshAppointTypeData(dataType, loadType) {
   return {
-    type: APPOINT_TYPE.REFRESH,
+    type: `${APPOINT_TYPE.REFRESH}_${dataType}`,
     payload: {
       dataType,
-      data,
+      loadType
     },
   }
 }
-export function fetchAppointTypeDataSuccess(dataType, data) {
+export function fetchAppointTypeDataSuccess(loadType, dataType, data) {
   return {
     type: APPOINT_TYPE.SUCCESS,
     payload: {
       dataType,
+      loadType,
       data,
     },
   }
 }
-export function fetchAppointTypeDataFailure(...err) {
+export function fetchAppointTypeDataFailure(dataType, res, err) {
   return {
     type: APPOINT_TYPE.FAILURE,
     payload: {
-      ...err,
+      dataType,
+      res,
+      err,
     },
   }
 }

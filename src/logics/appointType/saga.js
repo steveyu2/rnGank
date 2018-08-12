@@ -1,44 +1,49 @@
-import { APPOINT_TYPE } from '../../commons/actionTypes';
 import {
   call,
   put,
+  all,
   takeLatest,
-  takeEvery,
   select,
 } from 'redux-saga/effects';
 import {
-  fetchAppointTypeData,
-  refreshAppointTypeData,
   fetchAppointTypeDataSuccess,
   fetchAppointTypeDataFailure,
 } from './action';
+import { APPOINT_TYPE } from '../../commons/actionTypes';
 import { Console } from '../../commons/util';
 import Api, { gankio } from '../../commons/Api';
 import { getAppointType } from '../select';
 
 function* appointTypeData(action) {
-  try {
-    let results;
     const { dataType, loadType } = action.payload;
+    let results;
+    let response;
+  try {
     const { page, limit } = yield select(getAppointType, dataType);
-    const response = yield call(Api.fetchAppointTypeData, dataType, limit, page - 1);
+
+    response = yield call(Api.fetchAppointTypeData, dataType, limit, page - 1);
 
     if(response.status !== 200 || response.data.error) {
-      yield put(fetchAppointTypeDataFailure(response));
+      yield put(fetchAppointTypeDataFailure(dataType, response, ""));
     }
+    
     results = response.data.results;
-    // 刷新
-    if(loadType === APPOINT_TYPE.REFRESH){
-      yield put(refreshAppointTypeData(dataType, results));
-    } else {
-      yield put(fetchAppointTypeDataSuccess(dataType, results));
-    }
+
+    yield put(fetchAppointTypeDataSuccess(loadType, dataType, results));
   } catch(err) {
     Console.error(err);
-    yield put(fetchAppointTypeDataFailure(err, response));
+    yield put(fetchAppointTypeDataFailure(dataType, response, err));
   }
 }
 
 export default function* appointTypeDataWatch() {
-  yield takeEvery(APPOINT_TYPE.REQUEST, appointTypeData);
+  const sagas = Object.keys(gankio.type).map(v => {
+    const type = gankio.type[v];
+    return [
+      takeLatest(`${APPOINT_TYPE.REQUEST}_${type}`, appointTypeData),
+      takeLatest(`${APPOINT_TYPE.REFRESH}_${type}`, appointTypeData),
+    ];
+  }).reduce((a,b) => [...a, ...b], [])
+
+  yield all(sagas)
 }

@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view';
 // import ScrollableTabBar from './ScrollableTabBar';
 import { FONT_SIZE, adaptUnits, TAB_HEIGHT} from '../commons/constants';
+import theme from '../commons/theme';
 
 class MyScrollableTabBar extends PureComponent{
 
@@ -10,22 +11,32 @@ class MyScrollableTabBar extends PureComponent{
     const {
       mainColor,
       children,
+      tabHeight = TAB_HEIGHT,
+      // tabStyle,
     } = this.props;
-  
+
+    let addStyle=[]
+
+    if(theme.tabContainerStyle.backgroundColor) {
+      addStyle=[
+        {borderColor: theme.tabContainerStyle.backgroundColor}
+      ];
+    }
+
     return (
       <ScrollableTabView
-        tabBarBackgroundColor={"#fff" }
-        tabBarInactiveTextColor="#999"
-        tabBarActiveTextColor={mainColor}
+        tabBarBackgroundColor={theme.tabContainerStyle.backgroundColor || "#fff"}
+        tabBarInactiveTextColor={theme.text.color || "#999"}
+        tabBarActiveTextColor={theme.lightText.color || mainColor}
         tabBarTextStyle={{fontSize: FONT_SIZE.NM}}
         initialPage={0}
-        tabBarUnderlineStyle={[styles.underline, {backgroundColor: mainColor}]}
+        tabBarUnderlineStyle={[styles.underline, {backgroundColor: theme.lightText.color || mainColor}]}
         prerenderingSiblingsNumber={0} 
         renderTabBar={
           _props => (
             <ScrollableTabBar
-              style={{height: TAB_HEIGHT}}
-              tabStyle={[styles.tab, {height: TAB_HEIGHT}]}
+              style={[{height: tabHeight}, ...addStyle]}
+              tabStyle={[styles.tab, {height: tabHeight}, theme.tabContainerStyle]}
               {..._props}
               />
           )}

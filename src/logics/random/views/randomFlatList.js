@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { connect } from 'react-redux';
-import immutable from 'immutable';
+import Immutable from 'immutable';
 import FlatList from '../../../components/FlatList';
 import gankRenderItems from '../../../components/gankRenderItems';
 import LoadingView from '../../../components/loadingView';
 import { gankio } from '../../../commons/Api';
 import { RANDOM } from '../../../commons/actionTypes';
+import theme from '../../../commons/theme';
 import * as randomAction from '../action';
+// import { propsDiff } from '../../selector';
 
 class RandomFlatList extends Component {
   constructor(props) {
@@ -19,7 +21,11 @@ class RandomFlatList extends Component {
     this._onEndReached = this._onEndReached.bind(this);
   }
 
-  _keyExtractor  = (data, i) => data._id + i;
+  // shouldComponentUpdate(nextProps) {
+  //   return propsDiff(this.props, nextProps)
+  // }
+
+  _keyExtractor  = data => data._id;
 
   _renderItem ({item , i}) {
     const {
@@ -77,13 +83,32 @@ class RandomFlatList extends Component {
     } = this.props;
 
     const currentData = data[dataGankType];
+    const extraData = {
+      data: [...currentData.data],
+      pullUpLoading: currentData.loading,
+      mainColor,
+    }
 
-    return (currentData.loaded
-      ?<LoadingView fullScreen color={mainColor}/>
+    return (!currentData.loaded
+      ?currentData.error
+      ?<LoadingView
+        fullScreen
+        infoIconName="ios-alert"
+        color={theme.blackText.color || mainColor}
+        iconColor={theme.lightText.color || mainColor}
+        btnBackgroundColor={theme.blackText.color || mainColor}
+        text="加载失败了"
+        textAlign="left"
+        btnText="重试"
+        textColor={theme.lightText.color || '#444'}
+        btnOnPress={this._onEndReached}
+      />
+      :<LoadingView fullScreen color={theme.lightText.color || mainColor}/>
       :<FlatList
         style={ styles.container }
         mainColor={ mainColor }
-        data={ currentData.data }
+        data={ extraData.data }
+        extraData={ extraData }
         renderItem={ this._renderItem }
         keyExtractor={ this._keyExtractor }
         onEndReached={ this._onEndReached }

@@ -147,7 +147,6 @@ dependencies {
     compile project(':react-native-vector-icons')
     compile project(':react-native-spinkit')
     compile project(':react-native-picker')
-    compile project(':react-native-localization')
     compile project(':react-native-device-info')
     compile project(':react-native-splash-screen')
     compile fileTree(dir: "libs", include: ["*.jar"])

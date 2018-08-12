@@ -3,10 +3,10 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
-import { connect, Provider } from 'react-redux';
-import SplashScreen from 'react-native-splash-screen';
+import { Provider } from 'react-redux';
+// import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 import store from './logics/store';
 
@@ -15,15 +15,10 @@ const styles = StyleSheet.create({
 });
 
 export default class Root extends Component {
-
-  componentDidMount() {
-    // 首屏
-    SplashScreen.hide();
-  }
   render() {
     return (
       <Provider store={store}>
-        <App />
+          <App />
       </Provider>
     );
   }

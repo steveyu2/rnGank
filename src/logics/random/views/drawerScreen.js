@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { FONT_SIZE, adaptUnits } from '../../../commons/constants';
+// import Immutable from 'immutable';
+// import { FONT_SIZE, adaptUnits } from '../../../commons/constants';
 import i18n from '../../../commons/i18n';
+import theme from '../../../commons/theme';
 import ScrollableTabView from '../../../components/ScrollableTabView';
 import DrawerNavigateHeader from '../../../components/drawerNavigateHeader';
 import { gankio } from '../../../commons/Api';
 import RandomFlatList from './randomFlatList';
+import { propsDiff } from '../../selector';
 
-class randomDrawer extends Component{
+class RandomDrawer extends Component{
 
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({ navigation, screenProps: {i18n} }) => ({
     drawerLabel: i18n.randomRecommendation,
     drawerIcon: ({ focused, tintColor }) => (
       <Icon
@@ -42,6 +45,10 @@ class randomDrawer extends Component{
     };
   }
 
+  // shouldComponentUpdate(nextProps) {
+  //   return propsDiff(this.props, nextProps)
+  // }
+
   tabContent() {
     const {
       TabTitles,
@@ -71,15 +78,15 @@ class randomDrawer extends Component{
     } = this.props;
 
     return (
-      <View style={[styles.container, {backgroundColor: bgColor}]}>
+      <View style={[styles.container, {backgroundColor: bgColor}, theme.container]}>
         <DrawerNavigateHeader 
           title={i18n.randomRecommendation}
-          navigation={navigation} 
-          mainColor={mainColor}
+          navigation={navigation}
+          mainColor={theme.container.backgroundColor || mainColor}
         />
         <ScrollableTabView
           style={styles.tabView}
-          mainColor={mainColor}
+          mainColor={mainColor} 
         >
           {this.tabContent()}
         </ScrollableTabView>
@@ -105,4 +112,4 @@ export default connect(
       // data: random,
     };
   }
-)(randomDrawer);
+)(RandomDrawer);

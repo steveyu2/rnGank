@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { DrawerItems, StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import theme from '../../commons/theme';
 import NavHeader from './header';
 import NavFooter from './footer';
 
@@ -39,21 +40,21 @@ class ContentComponent extends Component{
   render() {
     const {
       mainColor,
+      navigation,
     } = this.props;
     
-
     return (
-      <View style={styles.container}>
+      <View style={[ styles.container, theme.drawerContainerStyle]}>
         <ScrollView style={ styles.drawer } alwaysBounceVertical={false} >
           <NavHeader mainColor={mainColor}/>
           <DrawerItems
             {...this.props}
             onItemPress={this._onItemPress}
-            activeTintColor={mainColor}
-            inactiveTintColor="red"
+            activeTintColor={ theme.drawerNavActiveTextStyle.color || mainColor}
+            inactiveTintColor={ theme.drawerNavTextStyle.color }
           />
         </ScrollView>
-        <NavFooter />
+        <NavFooter navigation={navigation} onItemPress={this._onItemPress}/>
       </View>
     )
   }

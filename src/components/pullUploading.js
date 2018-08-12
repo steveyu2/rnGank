@@ -53,11 +53,38 @@ const onScroll = function(loadingKey, callback) {
 class ScrollViewFooter extends PureComponent{
 
   render() {
-    const { state, mainColor } = this.props;
+    const {
+      state,
+      mainColor,
+      iconColor,
+      textColor,
+      retry=()=>{},
+    } = this.props;
+    
     if(state === PULLUPLOAD.NOMORE){
-      return <LoadingView  infoIconName="ios-information-circle" color={ mainColor } text="没有更多了"/>;
+      return (
+        <LoadingView
+          infoIconName="ios-information-circle"
+          color={ mainColor }
+          text="没有更多了"
+          textAlign="right"
+          iconColor={iconColor}
+          textColor={textColor}
+        />
+      );
     }else if(state === PULLUPLOAD.FAILURE){
-      return <LoadingView  infoIconName="ios-alert" color={ mainColor } text="加载失败"/>;
+      return (
+        <LoadingView
+          infoIconName="ios-alert"
+          color={ mainColor }
+          text="加载失败"
+          textAlign="right"
+          btnText="重试"
+          btnOnPress={retry}
+          iconColor={iconColor}
+          textColor={textColor}
+        />
+      );
     }else if(state === PULLUPLOAD.ING){
       return (
         <LoadingView 
@@ -69,8 +96,10 @@ class ScrollViewFooter extends PureComponent{
       );
     }
     return <LoadingView size={adaptUnits(25, 'F')}
-    style={ styles.loadingWrap }
-    color="tgba(255,255,255,0)"/>;
+      style={ styles.loadingWrap }
+      color="rgba(255,255,255,0)"
+      loadingType="2"
+    />;
   }
 }
 
