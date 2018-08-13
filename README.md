@@ -20,6 +20,10 @@ rnGank是又一个react native开发的gank.io的App。
 
   <img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r1.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r2.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r3.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r4.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r5.gif"/><img width="290" style="display: inline-block" src="https://github.com/qw110946/rnGank/blob/master/src/others/imgs/r6.gif"/>
 
+### 下载
+
+ [v1.0](http://daregashira.top/files/rnGank-v1.0.apk)
+
 ### 感谢
 
   * [http://gank.io](http://gank.io)
