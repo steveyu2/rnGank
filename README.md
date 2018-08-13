@@ -22,7 +22,7 @@ rnGank是又一个react native开发的gank.io的App。
 
 ### 下载
 
- [v1.0](http://daregashira.top/files/rnGank-v1.0.apk)
+ [v1.1](http://daregashira.top/files/rnGank-v1.1.apk)
 
 ### 感谢
 
