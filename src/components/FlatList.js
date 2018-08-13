@@ -93,8 +93,8 @@ class MyFlatList extends Component {
         // onRefresh={ onRefresh }
         renderScrollComponent={this.renderScrollComponent}
         refreshComponentColor={mainColor}
-        onEndReachedThreshold={ 0.02 }
-        ListFooterComponent={this.ScrollViewFooter}
+        onEndReachedThreshold={ 0.05 }
+        ListFooterComponent={this.ScrollViewFooter()}
         {...this.props}
       />
     );

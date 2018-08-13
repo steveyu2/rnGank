@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
 });
 
 class rnGank extends Component {
+
   constructor() {
     super();
 
@@ -43,6 +44,7 @@ class rnGank extends Component {
     this.handleUpdateLangugeIndex = this.handleUpdateLangugeIndex.bind(this);
     this.handleUpdateThemeIndex = this.handleUpdateThemeIndex.bind(this);
   }
+
   componentDidMount() {
     const {
       fetchRandomData,
@@ -51,11 +53,13 @@ class rnGank extends Component {
     // fetchRandomData(gankio.type.ANDROID);
     // fetchAppointTypeData(gankio.type.IOS);
   }
+
   // 修改语言
   handleUpdateLangugeIndex(selectedLangugeIndex) {
     this.setState({ selectedLangugeIndex })
     this.props.setUserSetting({ languge: this.selectedLanguge[selectedLangugeIndex] })
   }
+
   // 修改主题
   handleUpdateThemeIndex(selectedThemeIndex) {
     this.setState({ selectedThemeIndex })
