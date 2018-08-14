@@ -21,7 +21,7 @@ function* appointTypeData(action) {
   try {
     const { page, limit } = yield select(getAppointType, dataType);
 
-    response = yield call(Api.fetchAppointTypeData, dataType, limit, page - 1);
+    response = yield call(Api.fetchAppointTypeData, dataType, limit, page);
 
     if(response.status !== 200 || response.data.error) {
       yield put(fetchAppointTypeDataFailure(dataType, response, ""));

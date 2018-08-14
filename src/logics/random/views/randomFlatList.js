@@ -71,7 +71,7 @@ class RandomFlatList extends Component {
       fetchRandomData,
       dataGankType,
     } = this.props;
-console.log('_onEndReached', 1);
+    
     fetchRandomData(dataGankType)
   }
 
