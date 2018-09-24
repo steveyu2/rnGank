@@ -1,46 +1,48 @@
 {
-	"name": "rnGank",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"axios": "^0.18.0",
-		"dayjs": "^1.7.5",
-		"immutable": "^3.8.2",
-		"react": "16.2.0",
-		"react-native": "0.50.0",
-		"react-native-animatable": "1.2.4",
-		"react-native-datepicker": "^1.7.2",
-		"react-native-device-info": "^0.21.5",
-		"react-native-elements": "0.19.0",
-		"react-native-git-upgrade": "^0.2.7",
-		"react-native-iphone-x-helper": "^1.0.3",
-		"react-native-picker": "^4.3.7",
-		"react-native-scrollable-tab-view": "^0.8.0",
-		"react-native-spinkit": "^1.1.1",
-		"react-native-splash-screen": "3.1.0",
-		"react-native-storage": "^0.2.2",
-		"react-native-swiper": "^1.5.13",
-		"react-native-vector-icons": "^4.6.0",
-		"react-navigation": "^2.11.2",
-		"react-redux": "^5.0.7",
-		"redux": "^4.0.0",
-		"redux-define": "^1.1.1",
-		"redux-saga": "^0.16.0",
-		"reselect": "^3.0.1"
-	},
-	"devDependencies": {
-		"babel-jest": "23.4.0",
-		"babel-preset-react-native": "4.0.0",
-		"jest": "23.4.1",
-		"react-test-renderer": "16.0.0-alpha.12",
-		"redux-logger": "^3.0.6",
-		"remote-redux-devtools": "^0.5.12"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "rnGank",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dayjs": "^1.7.5",
+    "immutable": "^3.8.2",
+    "react": "16.4.1",
+    "react-native": "^0.55.4",
+    "react-native-animatable": "1.2.4",
+    "react-native-datepicker": "^1.7.2",
+    "react-native-device-info": "^0.21.5",
+    "react-native-elements": "0.19.0",
+    "react-native-git-upgrade": "^0.2.7",
+    "react-native-iphone-x-helper": "^1.0.3",
+    "react-native-picker": "^4.3.7",
+    "react-native-scrollable-tab-view": "^0.8.0",
+    "react-native-spinkit": "^1.1.1",
+    "react-native-splash-screen": "^3.0.9",
+    "react-native-storage": "^0.2.2",
+    "react-native-swiper": "^1.5.13",
+    "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^2.11.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-define": "^1.1.1",
+    "redux-saga": "^0.16.0",
+    "reselect": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-react-native": "^4.0.0",
+    "babel-jest": "23.4.0",
+    "jest": "23.4.1",
+    "react-test-renderer": "16.0.0-alpha.12",
+    "redux-logger": "^3.0.6",
+    "remote-redux-devtools": "^0.5.12"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }

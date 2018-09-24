@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { connect } from 'react-redux';
-import Immutable from 'immutable';
-import FlatList from '../../../components/FlatList';
-import gankRenderItems from '../../../components/gankRenderItems';
-import LoadingView from '../../../components/loadingView';
-import { gankio } from '../../../commons/Api';
-import { APPOINT_TYPE } from '../../../commons/actionTypes';
-import theme from '../../../commons/theme';
-import * as appointTypeAction from '../action';
-import { propsDiff } from '../../selector';
+import React, { Component } from "react";
+import { StyleSheet, Text } from "react-native";
+import { connect } from "react-redux";
+import Immutable from "immutable";
+import FlatList from "../../../components/FlatList";
+import gankRenderItems from "../../../components/gankRenderItems";
+import LoadingView from "../../../components/loadingView";
+import { gankio } from "../../../commons/Api";
+import { APPOINT_TYPE } from "../../../commons/actionTypes";
+import theme from "../../../commons/theme";
+import * as appointTypeAction from "../action";
+// import { propsDiff } from '../../selector';
 
 class AppointTypeFlatList extends Component {
   constructor(props) {
@@ -25,19 +25,17 @@ class AppointTypeFlatList extends Component {
   //   return propsDiff(this.props, nextProps)
   // }
 
-  _keyExtractor  = (data, i) => data._id;
+  _keyExtractor = (data, i) => data._id;
 
-  _renderItem ({item , i}) {
-    const {
-      dataType,
-      mainColor,
-      navigation,
-    } = this.props;
+  _renderItem({ item, i }) {
+    const { dataType, mainColor, navigation } = this.props;
 
-    const type = Object.keys(gankio.type).filter(v => gankio.type[v] === item.type)[0];
-    if(type){
+    const type = Object.keys(gankio.type).filter(
+      v => gankio.type[v] === item.type
+    )[0];
+    if (type) {
       const Item = this.gankRenderItems[type];
-      return <Item data={item} mainColor={mainColor} navigation={navigation}/>
+      return <Item data={item} mainColor={mainColor} navigation={navigation} />;
     } else {
       return false;
     }
@@ -45,76 +43,65 @@ class AppointTypeFlatList extends Component {
     // console.log('dataType:', dataType)
   }
 
-  componentWillMount() {
-    const {
-      refreshAppointTypeData,
-      dataGankType,
-      data,
-    } = this.props;
+  componentDidMount() {
+    const { refreshAppointTypeData, dataGankType, data } = this.props;
 
-    if(data[dataGankType].data.length === 0) {
-      refreshAppointTypeData(dataGankType, APPOINT_TYPE.REFRESH)
+    if (data[dataGankType].data.length === 0) {
+      refreshAppointTypeData(dataGankType, APPOINT_TYPE.REFRESH);
     }
   }
 
   _onRefresh() {
-    const {
-      refreshAppointTypeData,
-      dataGankType,
-    } = this.props;
+    const { refreshAppointTypeData, dataGankType } = this.props;
 
-    refreshAppointTypeData(dataGankType, APPOINT_TYPE.REFRESH)
+    refreshAppointTypeData(dataGankType, APPOINT_TYPE.REFRESH);
   }
 
   _onEndReached() {
-    const {
-      fetchAppointTypeData,
-      dataGankType,
-    } = this.props;
+    const { fetchAppointTypeData, dataGankType } = this.props;
 
-    fetchAppointTypeData(dataGankType)
+    fetchAppointTypeData(dataGankType);
   }
 
   render() {
-    const {
-      mainColor,
-      dataGankType,
-      data,
-    } = this.props;
-    
+    const { mainColor, dataGankType, data } = this.props;
+
     const currentData = data[dataGankType];
     const extraData = {
       data: [...currentData.data],
       pullUpLoading: currentData.loading,
-      mainColor,
-    }
+      mainColor
+    };
 
-    return (!currentData.loaded
-      ?currentData.error
-      ?<LoadingView
-        fullScreen
-        infoIconName="ios-alert"
-        color={theme.blackText.color || mainColor}
-        iconColor={theme.lightText.color || mainColor}
-        btnBackgroundColor={theme.blackText.color || mainColor}
-        text="加载失败了"
-        textAlign="left"
-        btnText="重试"
-        textColor={theme.lightText.color || '#444'}
-        btnOnPress={this._onEndReached}
-      />
-      :<LoadingView fullScreen color={theme.lightText.color || mainColor}/>
-      :<FlatList
-        style={ styles.container }
-        mainColor={ mainColor }
-        data={ extraData.data }
-        extraData={ extraData }
-        renderItem={ this._renderItem }
-        keyExtractor={ this._keyExtractor }
-        onEndReached={ this._onEndReached }
-        onRefresh={ this._onRefresh }
-        refreshing={ currentData.refreshLoading }
-        pullUpLoading={ currentData.loading }
+    return !currentData.loaded ? (
+      currentData.error ? (
+        <LoadingView
+          fullScreen
+          infoIconName="ios-alert"
+          color={theme.blackText.color || mainColor}
+          iconColor={theme.lightText.color || mainColor}
+          btnBackgroundColor={theme.blackText.color || mainColor}
+          text="加载失败了"
+          textAlign="left"
+          btnText="重试"
+          textColor={theme.lightText.color || "#444"}
+          btnOnPress={this._onEndReached}
+        />
+      ) : (
+        <LoadingView fullScreen color={theme.lightText.color || mainColor} />
+      )
+    ) : (
+      <FlatList
+        style={styles.container}
+        mainColor={mainColor}
+        data={extraData.data}
+        extraData={extraData}
+        renderItem={this._renderItem}
+        keyExtractor={this._keyExtractor}
+        onEndReached={this._onEndReached}
+        onRefresh={this._onRefresh}
+        refreshing={currentData.refreshLoading}
+        pullUpLoading={currentData.loading}
       />
     );
   }
@@ -123,18 +110,18 @@ class AppointTypeFlatList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'transparent',
-  },
+    backgroundColor: "transparent"
+  }
 });
 
 export default connect(
   ({ userSetting, appointType }) => {
     return {
       mainColor: userSetting.mainColor,
-      data: appointType,
+      data: appointType
     };
   },
   {
-    ...appointTypeAction,
+    ...appointTypeAction
   }
 )(AppointTypeFlatList);
