@@ -1,22 +1,22 @@
-import { RANDOM } from '../../commons/actionTypes';
+import { RANDOM } from "~/common/actionTypes";
 
 export function fetchRandomData(dataType, loadType) {
   return {
     type: `${RANDOM.REQUEST}_${dataType}`,
     payload: {
       dataType,
-      loadType,
-    },
-  }
+      loadType
+    }
+  };
 }
 export function refreshRandomData(dataType, loadType) {
   return {
     type: `${RANDOM.REQUEST}_${dataType}`,
     payload: {
       dataType,
-      loadType,
-    },
-  }
+      loadType
+    }
+  };
 }
 export function fetchRandomDataSuccess(loadType, dataType, data) {
   return {
@@ -24,9 +24,9 @@ export function fetchRandomDataSuccess(loadType, dataType, data) {
     payload: {
       dataType,
       loadType,
-      data,
-    },
-  }
+      data
+    }
+  };
 }
 export function fetchRandomDataFailure(dataType, res, err) {
   return {
@@ -34,7 +34,7 @@ export function fetchRandomDataFailure(dataType, res, err) {
     payload: {
       dataType,
       res,
-      err,
-    },
-  }
+      err
+    }
+  };
 }

@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { StyleSheet, Text } from "react-native";
 import { connect } from "react-redux";
 import Immutable from "immutable";
-import FlatList from "../../../components/FlatList";
-import gankRenderItems from "../../../components/gankRenderItems";
-import LoadingView from "../../../components/loadingView";
-import { gankio } from "../../../commons/Api";
-import { RANDOM } from "../../../commons/actionTypes";
-import theme from "../../../commons/theme";
+import FlatList from "~/components/FlatList";
+import gankRenderItems from "~/components/gankRenderItems";
+import LoadingView from "~/components/loadingView";
+import { gankio } from "~/common/Api";
+import { RANDOM } from "~/common/actionTypes";
+import theme from "~/common/theme";
 import * as randomAction from "../action";
 // import { propsDiff } from '../../selector';
 
@@ -80,7 +80,7 @@ class RandomFlatList extends Component {
           infoIconName="ios-alert"
           color={theme.blackText.color || mainColor}
           iconColor={theme.lightText.color || mainColor}
-          btnBackgroundColor={theme.blackText.color || mainColor}
+          color={theme.mainColor || mainColor}
           text="加载失败了"
           textAlign="left"
           btnText="重试"

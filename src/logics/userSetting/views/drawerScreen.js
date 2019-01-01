@@ -1,55 +1,57 @@
-import React, { Component, PureComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
-import { Icon } from 'react-native-elements';
-import { FONT_SIZE, SPACING, adaptUnits } from '../../../commons/constants';
-import i18n from '../../../commons/i18n';
-import theme from '../../../commons/theme';
-import DrawerNavigateHeader from '../../../components/drawerNavigateHeader';
-import Button from '../../../components/button';
-import * as userSettingAction from '../action';
+import React, { Component, PureComponent } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { connect } from "react-redux";
+import { Icon } from "react-native-elements";
+import { FONT_SIZE, SPACING, adaptUnits } from "~/common/constants";
+import i18n from "~/common/i18n";
+import theme from "~/common/theme";
+import DrawerNavigateHeader from "~/components/drawerNavigateHeader";
+import Button from "~/components/button";
+import * as userSettingAction from "../action";
 
 class userSetiingDrawerScreen extends Component {
-
-  static navigationOptions = ({ navigation, screenProps: {i18n, theme} }) => ({
+  static navigationOptions = ({
+    navigation,
+    screenProps: { i18n, theme }
+  }) => ({
     drawerLabel: i18n.setting,
     drawerIcon: ({ focused, tintColor }) => (
       <Icon
         name="settings"
         type="material-community"
-        color={focused? tintColor: '#000'}
+        color={focused ? tintColor : "#000"}
       />
     )
   });
 
   constructor(props) {
     super(props);
-  
+
     this.languges = {
-      zh: 'chinese',
-      jp: 'japanese',
-      en: 'english',
+      zh: "chinese",
+      jp: "japanese",
+      en: "english"
     };
 
     this.languges = {
-      zh: 'chinese',
-      jp: 'japanese',
-      en: 'english',
+      zh: "chinese",
+      jp: "japanese",
+      en: "english"
     };
-    
+
     this.themes = {
-      normal: 'normalMode',
-      night: 'nightMode',
+      normal: "normalMode",
+      night: "nightMode"
     };
-    
+
     this.mainColors = {
-      black: '#383838',
-      blue: '#2196f3',
-      red: '#B22222',
+      black: "#383838",
+      blue: "#2196f3",
+      red: "#B22222"
       //2F4F4F
     };
   }
-  
+
   render() {
     const {
       mainColor,
@@ -59,111 +61,105 @@ class userSetiingDrawerScreen extends Component {
       languge,
       setUserSetting
     } = this.props;
-    const {
-      languges,
-      themes,
-      mainColors,
-    } = this;
-    const titleColor = theme.lightText.color || '#666';
-    const TextColor = theme.text.color || '#000';
+    const { languges, themes, mainColors } = this;
+    const titleColor = theme.lightText.color || "#666";
+    const TextColor = theme.text.color || "#000";
     const iconColor = theme.lightText.color || mainColor;
 
     const langugeOptions = Object.keys(languges).map(v => (
-      <CheckView 
+      <CheckView
         key={v}
         text={i18n[languges[v]]}
         textColor={TextColor}
-        iconColor={ iconColor }
+        iconColor={iconColor}
         onPress={setUserSetting}
         params={{ languge: v }}
-        active={ v === languge }
-        />
+        active={v === languge}
+      />
     ));
 
     const themeOptions = Object.keys(themes).map(v => (
-      <CheckView 
+      <CheckView
         key={v}
         text={i18n[themes[v]]}
         textColor={TextColor}
-        iconColor={ iconColor }
+        iconColor={iconColor}
         onPress={setUserSetting}
         params={{ themeName: v }}
-        active={ v === themeName }
-        />
+        active={v === themeName}
+      />
     ));
 
     const mainColorOptions = Object.keys(mainColors).map(v => (
-      <CheckView 
+      <CheckView
         key={v}
         text={i18n[v]}
-        textColor={ mainColors[v] === '#383838' ? TextColor: mainColors[v] }
-        iconColor={ iconColor }
+        textColor={mainColors[v] === "#383838" ? TextColor : mainColors[v]}
+        iconColor={iconColor}
         onPress={setUserSetting}
         params={{ mainColor: mainColors[v] }}
-        active={ mainColors[v] === mainColor }
-        />
+        active={mainColors[v] === mainColor}
+      />
     ));
 
     return (
-      <View style={[styles.container, {backgroundColor: bgColor}, theme.container]}>
-        <DrawerNavigateHeader 
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: bgColor },
+          theme.container
+        ]}
+      >
+        <DrawerNavigateHeader
           title={i18n.setting}
           navigation={navigation}
           mainColor={theme.container.backgroundColor || mainColor}
         />
-        <Title text={i18n.languge} textColor={titleColor}/>
-        { langugeOptions }
-        <Title text={i18n.theme} textColor={titleColor}/>
-        { themeOptions }
-        <Title text={i18n.mainColor} textColor={titleColor}/>
-        { mainColorOptions }
+        <Title text={i18n.languge} textColor={titleColor} />
+        {langugeOptions}
+        <Title text={i18n.theme} textColor={titleColor} />
+        {themeOptions}
+        <Title text={i18n.mainColor} textColor={titleColor} />
+        {mainColorOptions}
       </View>
-    )
+    );
   }
 }
 
-const Title = ({ text, textColor })=> (
+const Title = ({ text, textColor }) => (
   <View style={styles.titleWrap}>
-    <Text style={[ styles.titleText, {color: textColor} ]}>{text}</Text>
+    <Text style={[styles.titleText, { color: textColor }]}>{text}</Text>
   </View>
 );
-class CheckView extends PureComponent{
-
+class CheckView extends PureComponent {
   constructor() {
     super();
 
     this._onPress = this._onPress.bind(this);
   }
 
-  _onPress () {
-    const {
-      onPress=()=>{},
-    } = this.props;
-    let {
-      params=[],
-    } = this.props;
+  _onPress() {
+    const { onPress = () => {} } = this.props;
+    let { params = [] } = this.props;
 
-    params = Array.isArray(params)? params: [params];
-    onPress(...params)
+    params = Array.isArray(params) ? params : [params];
+    onPress(...params);
   }
 
   render() {
-    const {
-      text,
-      textColor,
-      active,
-      iconColor,
-    } = this.props;
+    const { text, textColor, active, iconColor } = this.props;
 
     return (
       <Button onPress={this._onPress}>
         <View style={styles.CheckViewWrap}>
-          <Text style={[styles.CheckViewText, {color: textColor}]}>{text}</Text>
+          <Text style={[styles.CheckViewText, { color: textColor }]}>
+            {text}
+          </Text>
           {active && (
             <Icon
               name="md-checkmark-circle-outline" // md-checkbox-outline
               type="ionicon"
-              size={adaptUnits(30, 'H')}
+              size={adaptUnits(30, "H")}
               color={iconColor}
             />
           )}
@@ -175,31 +171,31 @@ class CheckView extends PureComponent{
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   titleWrap: {
     padding: SPACING * 1.5,
-    paddingBottom: SPACING * 0.8,
+    paddingBottom: SPACING * 0.8
     // paddingRight: SPACING,
   },
   titleText: {
     fontSize: FONT_SIZE.XS,
-    color: '#666',
+    color: "#666"
   },
   CheckViewWrap: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingLeft: SPACING * 2,
     paddingRight: SPACING * 2,
-    height: adaptUnits(80, 'H'),
+    height: adaptUnits(80, "H")
     // paddingTop: SPACING * 0.8,
     // paddingBottom: SPACING * 0.8,
   },
   CheckViewText: {
     fontSize: FONT_SIZE.NR,
-    color: '#000',
-  },
+    color: "#000"
+  }
 });
 
 export default connect(
@@ -208,11 +204,11 @@ export default connect(
       mainColor: userSetting.mainColor,
       bgColor: userSetting.bgColor,
       languge: userSetting.languge,
-      themeName: userSetting.themeName,
+      themeName: userSetting.themeName
       // data: random,
     };
   },
   {
-    ...userSettingAction,
+    ...userSettingAction
   }
 )(userSetiingDrawerScreen);

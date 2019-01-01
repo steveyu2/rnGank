@@ -7,11 +7,11 @@ import {
   SCREEN_WIDTH,
   FONT_SIZE,
   SCREENS
-} from "../../commons/constants";
-import Button from "../../components/button";
-import { timeMsg, cutstr } from "../../commons/util";
-import i18n, { getLanguge } from "../../commons/i18n";
-import theme from "../../commons/theme";
+} from "~/common/constants";
+import Button from "~/components/button";
+import { timeMsg, cutstr } from "~/common/util";
+import i18n, { getLanguge } from "~/common/i18n";
+import theme from "~/common/theme";
 // import Lightbox from 'react-native-lightbox';
 
 const WIDTH = SCREEN_WIDTH - SPACING * 2;

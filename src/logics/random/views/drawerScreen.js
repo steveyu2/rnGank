@@ -1,26 +1,24 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { Icon } from "react-native-elements";
+import { connect } from "react-redux";
 // import Immutable from 'immutable';
-// import { FONT_SIZE, adaptUnits } from '../../../commons/constants';
-import i18n from '../../../commons/i18n';
-import theme from '../../../commons/theme';
-import ScrollableTabView from '../../../components/ScrollableTabView';
-import DrawerNavigateHeader from '../../../components/drawerNavigateHeader';
-import { gankio } from '../../../commons/Api';
-import RandomFlatList from './randomFlatList';
-import { propsDiff } from '../../selector';
+import i18n from "~/common/i18n";
+import theme from "~/common/theme";
+import ScrollableTabView from "~/components/ScrollableTabView";
+import DrawerNavigateHeader from "~/components/drawerNavigateHeader";
+import { gankio } from "~/common/Api";
+import RandomFlatList from "./randomFlatList";
+// import { propsDiff } from "../../selector";
 
-class RandomDrawer extends Component{
-
-  static navigationOptions = ({ navigation, screenProps: {i18n} }) => ({
+class RandomDrawer extends Component {
+  static navigationOptions = ({ navigation, screenProps: { i18n } }) => ({
     drawerLabel: i18n.randomRecommendation,
     drawerIcon: ({ focused, tintColor }) => (
       <Icon
         name="md-infinite"
         type="ionicon"
-        color={focused? tintColor: '#000'}
+        color={focused ? tintColor : "#000"}
       />
     )
   });
@@ -30,18 +28,18 @@ class RandomDrawer extends Component{
 
     // i18n -> gankio.type
     this.dataType = {
-      all: 'ALL',
-      welfare: 'FULI',
-      android: 'ANDROID',
-      ios: 'IOS',
-      leisureVideo: 'LEISUREVIDEO',
-      expand: 'EXPAND',
-      web: 'WEB',
-      blindRecommend: 'BLINDRECOMMEND',
-      app: 'APP',
+      all: "ALL",
+      welfare: "FULI",
+      android: "ANDROID",
+      ios: "IOS",
+      leisureVideo: "LEISUREVIDEO",
+      expand: "EXPAND",
+      web: "WEB",
+      blindRecommend: "BLINDRECOMMEND",
+      app: "APP"
     };
     this.state = {
-      TabTitles: Object.keys(this.dataType),
+      TabTitles: Object.keys(this.dataType)
     };
   }
 
@@ -50,16 +48,12 @@ class RandomDrawer extends Component{
   // }
 
   tabContent() {
-    const {
-      TabTitles,
-    } = this.state;
-    const {
-      navigation,
-    } = this.props;
+    const { TabTitles } = this.state;
+    const { navigation } = this.props;
 
     return TabTitles.map((v, i) => {
       return (
-        <RandomFlatList 
+        <RandomFlatList
           key={i}
           dataType={this.dataType[v]}
           dataGankType={gankio.type[this.dataType[v]]}
@@ -71,45 +65,36 @@ class RandomDrawer extends Component{
   }
 
   render() {
-    const {
-      mainColor,
-      bgColor,
-      navigation,
-    } = this.props;
+    const { mainColor, bgColor, navigation } = this.props;
 
     return (
-      <View style={[styles.container, {backgroundColor: bgColor}, theme.container]}>
-        <DrawerNavigateHeader 
+      <View style={[styles.container, theme.background]}>
+        <DrawerNavigateHeader
           title={i18n.randomRecommendation}
           navigation={navigation}
-          mainColor={theme.container.backgroundColor || mainColor}
+          style={[{ backgroundColor: mainColor }, theme.headerStyle]}
         />
-        <ScrollableTabView
-          style={styles.tabView}
-          mainColor={mainColor} 
-        >
+        <ScrollableTabView style={styles.tabView} mainColor={mainColor}>
           {this.tabContent()}
         </ScrollableTabView>
       </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   tabView: {
-    backgroundColor: 'transparent',
-  },
+    backgroundColor: "transparent"
+  }
 });
 
-export default connect(
-  ({ userSetting }) => {
-    return {
-      mainColor: userSetting.mainColor,
-      bgColor: userSetting.bgColor,
-      // data: random,
-    };
-  }
-)(RandomDrawer);
+export default connect(({ userSetting }) => {
+  return {
+    mainColor: userSetting.mainColor,
+    bgColor: userSetting.bgColor
+    // data: random,
+  };
+})(RandomDrawer);

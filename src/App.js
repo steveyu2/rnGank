@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import SplashScreen from "react-native-splash-screen";
-import { Console } from "./commons/util";
+
+import { Console } from "~/common/util";
+import i18n from "~/common/i18n";
+import theme from "~/common/theme";
+
 import StackNavigator from "./navigations/stackNavigator";
 import * as userSettingAction from "./logics/userSetting/action";
-import i18n from "./commons/i18n";
-import theme from "./commons/theme";
 
 const styles = StyleSheet.create({
   container: {

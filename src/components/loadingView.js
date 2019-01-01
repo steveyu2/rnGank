@@ -1,18 +1,13 @@
-import React, { PureComponent } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
-import Spinkit from 'react-native-spinkit';
-import { Icon } from 'react-native-elements';
-import * as Animatable from 'react-native-animatable';
-import { adaptUnits, FONT_SIZE } from '../commons/constants';
-import { parseColorToRgba } from '../commons/util';
-import Button from '../components/button';
+import React, { PureComponent } from "react";
+import { StyleSheet, View, Text } from "react-native";
+import Spinkit from "react-native-spinkit";
+import { Icon } from "react-native-elements";
+import * as Animatable from "react-native-animatable";
+import { adaptUnits, FONT_SIZE } from "~/common/constants";
+// import { parseColorToRgba } from "~/common/util";
+import Button from "~/components/button";
 
-class LoadingView extends PureComponent{
-
+class LoadingView extends PureComponent {
   loadingType = `
     Bounce,
     Wave,
@@ -22,31 +17,33 @@ class LoadingView extends PureComponent{
     WanderingCubes,
     Pulse,
     ChasingDots,
-    FadingCircleAlt`.replace(/[\r\n\s]/gi,'').split(',');
+    FadingCircleAlt`
+    .replace(/[\r\n\s]/gi, "")
+    .split(",");
 
   render() {
     const {
-      style={},
-      loadingStyle={},
+      style = {},
+      loadingStyle = {},
       infoIconName,
-      infoIconType='ionicon',
-      fullScreen=false,
+      infoIconType = "ionicon",
+      fullScreen = false,
       text,
-      textColor='#444',
+      textColor = "#444",
       textSize = FONT_SIZE.SM,
-      textAlign = 'bottom', // right
+      textAlign = "bottom", // right
       btnText,
-      btnTextColor = '#fff',
+      btnTextColor = "#fff",
       btnBackgroundColor,
-      btnOnPress = () => {}, 
-      _ref=()=>{},
+      btnOnPress = () => {},
+      _ref = () => {}
     } = this.props;
 
     let {
-      loadingType="1",
-      color='#000',
+      loadingType = "1",
+      color = "#000",
       iconColor = color,
-      size = adaptUnits(40, 'F'),
+      size = adaptUnits(40, "F")
     } = this.props;
     let compView;
     // const iconColor = color;
@@ -55,32 +52,32 @@ class LoadingView extends PureComponent{
 
     // 附加样式
     const addStyle = {
-      container: {  },
+      container: {},
       loadingContainer: {
-        flexDirection: textAlign === 'bottom'? 'column': 'row',
-      },
-    }
+        flexDirection: textAlign === "bottom" ? "column" : "row"
+      }
+    };
 
     // 全屏
-    if(fullScreen) {
-      addStyle.container = { height: '100%' };
+    if (fullScreen) {
+      addStyle.container = { height: "100%" };
       addStyle.loadingContainer = {
         ...addStyle.loadingContainer,
-        marginTop: adaptUnits(-300 ,'H'),
+        marginTop: adaptUnits(-300, "H")
       };
     }
 
-    if(color.length <= 7) {
-      color = parseColorToRgba(color, 1, {R: -33, G: -15, B: 0});
-    }
+    // if(color.length <= 7) {
+    //   color = parseColorToRgba(color, 1, {R: -33, G: -15, B: 0});
+    // }
 
-    if(!infoIconName) {
+    if (!infoIconName) {
       compView = (
         <View
           style={[
             styles.loadingContainer,
             addStyle.loadingContainer,
-            loadingStyle,
+            loadingStyle
           ]}
         >
           <Spinkit
@@ -90,96 +87,100 @@ class LoadingView extends PureComponent{
           />
           {text && (
             <Text
-            style={[
-              styles.loadingText,
-              {color: textColor, fontSize: textSize}
-            ]}
-            >{text}</Text>
+              style={[
+                styles.loadingText,
+                { color: textColor, fontSize: textSize }
+              ]}
+            >
+              {text}
+            </Text>
           )}
-        </View>);
+        </View>
+      );
     } else {
-      size = adaptUnits(18, 'F'),
-      compView = (
-        <View
-          style={[
-          styles.infoContainer,
-          addStyle.loadingContainer,
-          loadingStyle,
-          ]}
-        >
-          <Icon
-            size={size}
-            color={iconColor}
-            type={infoIconType}
-            name={infoIconName}
-          />
-          {text && (
-            <Text
+      (size = adaptUnits(18, "F")),
+        (compView = (
+          <View
             style={[
-              styles.infoText,
-              {color: textColor, fontSize: textSize}
+              styles.infoContainer,
+              addStyle.loadingContainer,
+              loadingStyle
             ]}
-            >{text}</Text>
-          )}
-          {btnText && (
-            <Button style={[styles.btnWrap, {backgroundColor: btnBackgroundColor || color,}]} onPress={btnOnPress}>
+          >
+            <Icon
+              size={size}
+              color={iconColor}
+              type={infoIconType}
+              name={infoIconName}
+            />
+            {text && (
               <Text
                 style={[
-                  {color: btnTextColor, fontSize: textSize}
+                  styles.infoText,
+                  { color: textColor, fontSize: textSize }
                 ]}
               >
-                {btnText}
+                {text}
               </Text>
-            </Button>
-          )}
-        </View>);
+            )}
+            {btnText && (
+              <Button
+                style={[
+                  styles.btnWrap,
+                  { backgroundColor: btnBackgroundColor || color }
+                ]}
+                onPress={btnOnPress}
+              >
+                <Text style={[{ color: btnTextColor, fontSize: textSize }]}>
+                  {btnText}
+                </Text>
+              </Button>
+            )}
+          </View>
+        ));
     }
 
     return (
-      <Animatable.View 
-        style={[
-          styles.container,
-          addStyle.container,
-          style
-        ]}
+      <Animatable.View
+        style={[styles.container, addStyle.container, style]}
         ref={_ref}
       >
-        { compView }
+        {compView}
       </Animatable.View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255, 0)',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255, 0)"
   },
   loadingContainer: {
-    alignItems: 'center',
+    alignItems: "center"
   },
   loadingText: {
-    marginTop: adaptUnits(15 ,'H'),
-    paddingBottom: adaptUnits(25 ,'W'),
+    marginTop: adaptUnits(15, "H"),
+    paddingBottom: adaptUnits(25, "W")
   },
   infoContainer: {
     // flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: "center",
     // justifyContent: 'center',
-    paddingTop: adaptUnits(25 ,'W'),
-    paddingBottom: adaptUnits(25 ,'W'),
+    paddingTop: adaptUnits(25, "W"),
+    paddingBottom: adaptUnits(25, "W")
   },
   infoText: {
-    marginLeft: adaptUnits(10 ,'W'),
+    marginLeft: adaptUnits(10, "W")
   },
   btnWrap: {
-    marginLeft: adaptUnits(10 ,'W'),
-    paddingLeft: adaptUnits(10 ,'W'),
-    paddingRight: adaptUnits(10 ,'W'),
-    paddingTop: adaptUnits(5 ,'W'),
-    paddingBottom: adaptUnits(5 ,'W'),
-    borderRadius: 3,
+    marginLeft: adaptUnits(10, "W"),
+    paddingLeft: adaptUnits(10, "W"),
+    paddingRight: adaptUnits(10, "W"),
+    paddingTop: adaptUnits(5, "W"),
+    paddingBottom: adaptUnits(5, "W"),
+    borderRadius: 3
   }
 });
 

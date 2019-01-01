@@ -1,29 +1,21 @@
-import React, { PureComponent } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Platform,
-} from 'react-native';
-import MyButton from './button';
-import {
-  HEADER_HEIGHT,
-} from '../commons/constants';
-import { Icon } from 'react-native-elements';
+import React, { PureComponent } from "react";
+import { StyleSheet, View, Text, Platform } from "react-native";
+import MyButton from "./button";
+import { HEADER_HEIGHT } from "~/common/constants";
+import { Icon } from "react-native-elements";
 
 class HeaderButton extends PureComponent {
-
   render() {
     const {
-      size=26,
-      name = 'md-search',
-      type = 'ionicon',
+      size = 26,
+      name = "md-search",
+      type = "ionicon",
       onPress = () => {},
       ripple = true,
-      ripplecolor = 'white',
+      ripplecolor = "white",
       large = true,
-      btnColor = '#fff',
-      style,
+      btnColor = "#fff",
+      style
     } = this.props;
 
     return (
@@ -33,12 +25,7 @@ class HeaderButton extends PureComponent {
         ripple={ripple}
         ripplecolor={ripplecolor}
       >
-        <Icon
-          name={name}
-          type={type}
-          size={size}
-          color={btnColor}
-        />
+        <Icon name={name} type={type} size={size} color={btnColor} />
       </MyButton>
     );
   }
@@ -47,12 +34,12 @@ class HeaderButton extends PureComponent {
 const styles = StyleSheet.create({
   button: {
     height: HEADER_HEIGHT / 1.5,
-    width: HEADER_HEIGHT / 1.5, 
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 5,
-  },
+    width: HEADER_HEIGHT / 1.5,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 5
+  }
 });
 
 export default HeaderButton;

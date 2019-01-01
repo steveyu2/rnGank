@@ -1,37 +1,32 @@
-import React, {PureComponent} from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Spinner from 'react-native-spinkit';
-import { FONT_SIZE, adaptUnits } from '../commons/constants';
-import LoadingView from './loadingView'
+import React, { PureComponent } from "react";
+import { View, Text, StyleSheet } from "react-native";
+// import Spinner from "react-native-spinkit";
+import { FONT_SIZE, adaptUnits } from "~/common/constants";
+import LoadingView from "./loadingView";
 
 // 上拉加载状态
 const PULLUPLOAD = {
-    SUCCESS: 'SUCCESS',
-    FAILURE: 'FAILURE',
-    ING: 'ING',
-    NOMORE: 'NOMORE'
+  SUCCESS: "SUCCESS",
+  FAILURE: "FAILURE",
+  ING: "ING",
+  NOMORE: "NOMORE"
 };
 
 function WrapView(props) {
-  return (
-    <View style={styles.wrapView}>
-      {props.children}
-    </View>
-  )
-};
-
+  return <View style={styles.wrapView}>{props.children}</View>;
+}
 
 /**
  * onScroll
  * @param {string} loadingKey props里上拉加载的键值
- * @param {function} callback 
+ * @param {function} callback
  */
 const onScroll = function(loadingKey, callback) {
   return function(event) {
     var loading = this.props[loadingKey];
 
     // 已经在加载
-    if(loading === PULLUPLOAD.ING)return;
+    if (loading === PULLUPLOAD.ING) return;
 
     const y = event.nativeEvent.contentOffset.y;
     const height = event.nativeEvent.layoutMeasurement.height;
@@ -41,42 +36,41 @@ const onScroll = function(loadingKey, callback) {
     // console.log('contentHeight-->' + contentHeight);
 
     // 距离底部
-    if(y + height >= contentHeight - 300){
-        callback()
+    if (y + height >= contentHeight - 300) {
+      callback();
     }
-  }
-}
+  };
+};
 /**
  * 上拉的底部组件
- * @param {PULLUPLOAD.TYPE} state 
+ * @param {PULLUPLOAD.TYPE} state
  */
-class ScrollViewFooter extends PureComponent{
-
+class ScrollViewFooter extends PureComponent {
   render() {
     const {
       state,
       mainColor,
       iconColor,
       textColor,
-      retry=()=>{},
+      retry = () => {}
     } = this.props;
-    
-    if(state === PULLUPLOAD.NOMORE){
+
+    if (state === PULLUPLOAD.NOMORE) {
       return (
         <LoadingView
           infoIconName="ios-information-circle"
-          color={ mainColor }
+          color={mainColor}
           text="没有更多了"
           textAlign="right"
           iconColor={iconColor}
           textColor={textColor}
         />
       );
-    }else if(state === PULLUPLOAD.FAILURE){
+    } else if (state === PULLUPLOAD.FAILURE) {
       return (
         <LoadingView
           infoIconName="ios-alert"
-          color={ mainColor }
+          color={mainColor}
           text="加载失败"
           textAlign="right"
           btnText="重试"
@@ -85,36 +79,35 @@ class ScrollViewFooter extends PureComponent{
           textColor={textColor}
         />
       );
-    }else if(state === PULLUPLOAD.ING){
+    } else if (state === PULLUPLOAD.ING) {
       return (
-        <LoadingView 
-          size={adaptUnits(25, 'F')}
-          style={ styles.loadingWrap }
-          color={ mainColor }
+        <LoadingView
+          size={adaptUnits(25, "F")}
+          style={styles.loadingWrap}
+          color={mainColor}
           loadingType="2"
         />
       );
     }
-    return <LoadingView size={adaptUnits(25, 'F')}
-      style={ styles.loadingWrap }
-      color="rgba(255,255,255,0)"
-      loadingType="2"
-    />;
+    return (
+      <LoadingView
+        size={adaptUnits(25, "F")}
+        style={styles.loadingWrap}
+        color="rgba(255,255,255,0)"
+        loadingType="2"
+      />
+    );
   }
 }
 
 const styles = StyleSheet.create({
   loadingWrap: {
-    paddingTop: adaptUnits(20, 'H'),
-    paddingBottom: adaptUnits(10, 'H'),
+    paddingTop: adaptUnits(20, "H"),
+    paddingBottom: adaptUnits(10, "H")
   },
   normalView: {
-    height: adaptUnits(100, 'H'),
-  },
+    height: adaptUnits(100, "H")
+  }
 });
 
-export {
-    ScrollViewFooter,
-    PULLUPLOAD,
-    onScroll,
-};
+export { ScrollViewFooter, PULLUPLOAD, onScroll };

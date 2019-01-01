@@ -1,13 +1,13 @@
-import { APPOINT_TYPE } from '../../commons/actionTypes';
+import { APPOINT_TYPE } from "~/common/actionTypes";
 
 export function fetchAppointTypeData(dataType, loadType) {
   return {
     type: `${APPOINT_TYPE.REQUEST}_${dataType}`,
     payload: {
       dataType,
-      loadType,
-    },
-  }
+      loadType
+    }
+  };
 }
 export function refreshAppointTypeData(dataType, loadType) {
   return {
@@ -15,8 +15,8 @@ export function refreshAppointTypeData(dataType, loadType) {
     payload: {
       dataType,
       loadType
-    },
-  }
+    }
+  };
 }
 export function fetchAppointTypeDataSuccess(loadType, dataType, data) {
   return {
@@ -24,9 +24,9 @@ export function fetchAppointTypeDataSuccess(loadType, dataType, data) {
     payload: {
       dataType,
       loadType,
-      data,
-    },
-  }
+      data
+    }
+  };
 }
 export function fetchAppointTypeDataFailure(dataType, res, err) {
   return {
@@ -34,7 +34,7 @@ export function fetchAppointTypeDataFailure(dataType, res, err) {
     payload: {
       dataType,
       res,
-      err,
-    },
-  }
+      err
+    }
+  };
 }

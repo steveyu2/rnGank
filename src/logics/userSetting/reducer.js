@@ -1,10 +1,10 @@
-import { USER_SETTING } from '../../commons/actionTypes';
-import  { DEFAULT_SETTING } from '../../commons/constants';
+import { USER_SETTING } from "~/common/actionTypes";
+import { DEFAULT_SETTING } from "~/common/constants";
 
 const initState = {
   ...DEFAULT_SETTING,
   loading: false,
-  localLoad: false,
+  localLoad: false
 };
 
 function userSetting(state = initState, action = {}) {
@@ -14,7 +14,7 @@ function userSetting(state = initState, action = {}) {
     case USER_SETTING.REQUEST:
       return {
         ...state,
-        loading: true,
+        loading: true
       };
       break;
     case USER_SETTING.SUCCESS:
@@ -22,18 +22,18 @@ function userSetting(state = initState, action = {}) {
         ...state,
         ...setting,
         loading: false,
-        localLoad: true,
+        localLoad: true
       };
       break;
     case USER_SETTING.FAILURE:
       return {
         ...state,
         loading: false,
-        localLoad: true,
+        localLoad: true
       };
       break;
     default:
-      return state
+      return state;
   }
 }
 

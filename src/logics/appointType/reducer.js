@@ -1,7 +1,7 @@
-import { APPOINT_TYPE } from '../../commons/actionTypes';
-import { gankio } from '../../commons/Api';
-import { PULLUPLOAD } from '../../components/pullUploading';
-import { arrayUnique } from '../selector';
+import { APPOINT_TYPE } from "~/common/actionTypes";
+import { gankio } from "~/common/Api";
+import { PULLUPLOAD } from "../../components/pullUploading";
+import { arrayUnique } from "../selector";
 
 const dataState = {
   loaded: false, // 初次加载
@@ -10,19 +10,19 @@ const dataState = {
   error: false,
   data: [],
   limit: 30,
-  page: 1,
+  page: 1
 };
 
 const initState = {
-  [gankio.type.ALL]: {...dataState},
-  [gankio.type.FULI]: {...dataState, limit: 15,},
-  [gankio.type.ANDROID]: {...dataState},
-  [gankio.type.IOS]: {...dataState},
-  [gankio.type.WEB]: {...dataState},
-  [gankio.type.LEISUREVIDEO]: {...dataState}, // 休息视频
-  [gankio.type.EXPAND]: {...dataState}, // 拓展资源
-  [gankio.type.BLINDRECOMMEND]: {...dataState}, // 瞎推荐
-  [gankio.type.APP]: {...dataState},
+  [gankio.type.ALL]: { ...dataState },
+  [gankio.type.FULI]: { ...dataState, limit: 15 },
+  [gankio.type.ANDROID]: { ...dataState },
+  [gankio.type.IOS]: { ...dataState },
+  [gankio.type.WEB]: { ...dataState },
+  [gankio.type.LEISUREVIDEO]: { ...dataState }, // 休息视频
+  [gankio.type.EXPAND]: { ...dataState }, // 拓展资源
+  [gankio.type.BLINDRECOMMEND]: { ...dataState }, // 瞎推荐
+  [gankio.type.APP]: { ...dataState }
 };
 
 function appointType(state = initState, action = {}) {
@@ -35,8 +35,8 @@ function appointType(state = initState, action = {}) {
         ...state,
         [dataType]: {
           ...state[dataType],
-          loading: PULLUPLOAD.ING,
-        },
+          loading: PULLUPLOAD.ING
+        }
       };
       break;
     case APPOINT_TYPE.REFRESH:
@@ -46,8 +46,8 @@ function appointType(state = initState, action = {}) {
           ...state[dataType],
           refreshLoading: true,
           loading: false,
-          page: 1,
-        },
+          page: 1
+        }
       };
       break;
     case APPOINT_TYPE.SUCCESS:
@@ -55,13 +55,17 @@ function appointType(state = initState, action = {}) {
         ...state,
         [dataType]: {
           ...state[dataType],
-          data: arrayUnique(isRefreshRequest? data: [...state[dataType].data, ...data]),
-          refreshLoading: isRefreshRequest? false: state[dataType].refreshLoading,
+          data: arrayUnique(
+            isRefreshRequest ? data : [...state[dataType].data, ...data]
+          ),
+          refreshLoading: isRefreshRequest
+            ? false
+            : state[dataType].refreshLoading,
           // loading: isRefreshRequest? state[dataType].loading: PULLUPLOAD.ING,
-          loading: isRefreshRequest? PULLUPLOAD.ING: PULLUPLOAD.ING,
+          loading: isRefreshRequest ? PULLUPLOAD.ING : PULLUPLOAD.ING,
           loaded: true,
-          page: state[dataType].page + 1,
-        },
+          page: state[dataType].page + 1
+        }
       };
       break;
     case APPOINT_TYPE.FAILURE:
@@ -69,14 +73,18 @@ function appointType(state = initState, action = {}) {
         ...state,
         [dataType]: {
           ...state[dataType],
-          refreshLoading: isRefreshRequest? false: state[dataType].refreshLoading,
-          loading: isRefreshRequest? state[dataType].loading: PULLUPLOAD.FAILURE,
-          error: true,
-        },
+          refreshLoading: isRefreshRequest
+            ? false
+            : state[dataType].refreshLoading,
+          loading: isRefreshRequest
+            ? state[dataType].loading
+            : PULLUPLOAD.FAILURE,
+          error: true
+        }
       };
       break;
     default:
-      return state
+      return state;
   }
 }
 

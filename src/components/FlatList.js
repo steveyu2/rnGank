@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import { ScrollView, FlatList, RefreshControl } from 'react-native';
-import { ScrollViewFooter, PULLUPLOAD } from './pullUploading';
-import theme from '../commons/theme';
+import React, { Component } from "react";
+import { ScrollView, FlatList, RefreshControl } from "react-native";
+import { ScrollViewFooter, PULLUPLOAD } from "./pullUploading";
+import theme from "~/common/theme";
 
 class MyFlatList extends Component {
-
   constructor() {
     super();
     this.ScrollViewFooter = this.ScrollViewFooter.bind(this);
   }
 
-  renderScrollComponent (props) {
+  renderScrollComponent(props) {
     // if (this._isNestedWithSameOrientation()) {
     //  return <View {...props} />;
     // } else if (props.onRefresh) {
@@ -26,11 +25,11 @@ class MyFlatList extends Component {
           {...props}
           refreshControl={
             <RefreshControl
-              progressBackgroundColor={ props.progressBackgroundColor }
-              colors={[ props.refreshComponentColor ]}
-              refreshing={ props.refreshing }
-              onRefresh={ props.onRefresh }
-              progressViewOffset={ props.progressViewOffset }
+              progressBackgroundColor={props.progressBackgroundColor}
+              colors={[props.refreshComponentColor]}
+              refreshing={props.refreshing}
+              onRefresh={props.onRefresh}
+              progressViewOffset={props.progressViewOffset}
             />
           }
         />
@@ -39,7 +38,6 @@ class MyFlatList extends Component {
       return <ScrollView {...props} />;
     }
   }
-
 
   // infoIconName="ios-alert"
   // color={theme.blackText.color || mainColor}
@@ -51,25 +49,21 @@ class MyFlatList extends Component {
   // textColor={theme.lightText.color || '#444'}
   // btnOnPress={this._onEndReached}
 
-  ScrollViewFooter (props={}) {
-    const {
-      data,
-      mainColor,
-      onEndReached,
-    } = this.props;
+  ScrollViewFooter(props = {}) {
+    const { data, mainColor, onEndReached } = this.props;
     const state = this.props.pullUpLoading;
     return (
-      <ScrollViewFooter 
-        state={ state }
+      <ScrollViewFooter
+        state={state}
         mainColor={theme.blackText.color || mainColor}
         retry={onEndReached}
         iconColor={theme.lightText.color || mainColor}
-        textColor={theme.lightText.color || '#444'}
+        textColor={theme.lightText.color || "#444"}
         {...props}
       />
-    )
-  };
-  
+    );
+  }
+
   render() {
     const {
       // style,
@@ -79,9 +73,9 @@ class MyFlatList extends Component {
       // onEndReached
       onRefresh,
       refreshing,
-      mainColor,
+      mainColor
     } = this.props;
-    
+
     return (
       <FlatList
         // style={ style }
@@ -93,7 +87,7 @@ class MyFlatList extends Component {
         // onRefresh={ onRefresh }
         renderScrollComponent={this.renderScrollComponent}
         refreshComponentColor={mainColor}
-        onEndReachedThreshold={ 0.05 }
+        onEndReachedThreshold={0.05}
         ListFooterComponent={this.ScrollViewFooter()}
         {...this.props}
       />

@@ -1,0 +1,35 @@
+export default {
+  randomRecommendation: "RandomRecommend",
+  languge: "Languge",
+  theme: "Theme",
+  setting: "Setting",
+  all: "All",
+  welfare: "Welfare",
+  android: "Android",
+  ios: "iOS",
+  leisureVideo: "LeisureVideo", // Leisure
+  expand: "Expand", // Expand
+  web: "Web",
+  blindRecommend: "BlindRecommend", // Blind recommend
+  app: "app",
+  secondsAgo: "Seconds ago",
+  minutesAgo: "Minutes ago",
+  hoursAgo: "hours ago",
+  daysAgo: "days ago",
+  unknown: "Unknown",
+  leisure: "Leisure",
+  skill: "Technology",
+  dayNew: "Daily updated",
+  chinese: "中文",
+  japanese: "日本語",
+  english: "English",
+  mainColor: "Main color",
+  normalMode: "Normal",
+  nightMode: "Night",
+  blue: "Blue",
+  red: "Red",
+  black: "Black",
+  loading: "loading",
+  loadFailure: "Load Failure",
+  retry: "Retry"
+};

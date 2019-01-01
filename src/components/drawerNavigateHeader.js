@@ -1,45 +1,31 @@
-import React, { PureComponent } from 'react';
-import {
-  StyleSheet,
-} from 'react-native';
-import MyButton from './button';
-import {
-  HEADER_HEIGHT,
-} from '../commons/constants';
-import { Icon } from 'react-native-elements';
-import NavigateHeader, { HeaderButton } from './navigateHeader';
+import React, { PureComponent } from "react";
+import { StyleSheet } from "react-native";
+import MyButton from "./button";
+import { HEADER_HEIGHT } from "~/common/constants";
+import { Icon } from "react-native-elements";
+import NavigateHeader, { HeaderButton } from "./navigateHeader";
 
 class DrawerNavigateHeader extends PureComponent {
-
   constructor() {
     super();
 
     this.navLeftComponent = this.navLeftComponent.bind(this);
     this.navMenuOnPress = this.navMenuOnPress.bind(this);
   }
-  
+
   navMenuOnPress() {
-    const {
-      navigation,
-    } = this.props;
+    const { navigation } = this.props;
 
     navigation.openDrawer();
   }
 
   navLeftComponent() {
-    const {
-      navigation,
-      leftComponent = false,
-    } = this.props;
+    const { navigation, leftComponent = false } = this.props;
     const menu = (
-      <HeaderButton
-        noAction
-        name="md-menu"
-        onPress={this.navMenuOnPress}
-      />
+      <HeaderButton noAction name="md-menu" onPress={this.navMenuOnPress} />
     );
 
-    if(leftComponent){
+    if (leftComponent) {
       return leftComponent(menu);
     }
 
@@ -47,25 +33,23 @@ class DrawerNavigateHeader extends PureComponent {
   }
 
   render() {
-    const {
-      navigation,
-      mainColor,
-    } = this.props;
+    const { navigation, mainColor } = this.props;
 
     return (
-      <NavigateHeader 
+      <NavigateHeader
         backBtn={false}
-        navigation={navigation} 
+        navigation={navigation}
         mainColor={mainColor}
         {...this.props}
-        leftComponent={<HeaderButton name="md-menu" onPress={this.navMenuOnPress}/>||this.navLeftComponent()}
+        leftComponent={
+          <HeaderButton name="md-menu" onPress={this.navMenuOnPress} /> ||
+          this.navLeftComponent()
+        }
       />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  
-});
+const styles = StyleSheet.create({});
 
 export default DrawerNavigateHeader;
