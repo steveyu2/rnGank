@@ -1,8 +1,5 @@
 import React, { PureComponent } from "react";
 import { StyleSheet } from "react-native";
-import MyButton from "./button";
-import { HEADER_HEIGHT } from "~/common/constants";
-import { Icon } from "react-native-elements";
 import NavigateHeader, { HeaderButton } from "./navigateHeader";
 
 class DrawerNavigateHeader extends PureComponent {
@@ -33,13 +30,12 @@ class DrawerNavigateHeader extends PureComponent {
   }
 
   render() {
-    const { navigation, mainColor } = this.props;
+    const { navigation } = this.props;
 
     return (
       <NavigateHeader
         backBtn={false}
         navigation={navigation}
-        mainColor={mainColor}
         {...this.props}
         leftComponent={
           <HeaderButton name="md-menu" onPress={this.navMenuOnPress} /> ||

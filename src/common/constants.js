@@ -2,7 +2,7 @@ import { Platform, StatusBar, Dimensions, PixelRatio } from "react-native";
 import { Header } from "react-navigation";
 // import { isIphoneX } from "react-native-iphone-x-helper";
 
-export const DEV = false;
+export const DEV = true;
 
 const baseScreenHeight = 1280;
 const baseScreenWidth = 720;

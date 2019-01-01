@@ -113,7 +113,7 @@ class userSetiingDrawerScreen extends Component {
         <DrawerNavigateHeader
           title={i18n.setting}
           navigation={navigation}
-          mainColor={theme.container.backgroundColor || mainColor}
+          style={[{ backgroundColor: mainColor }, theme.headerStyle]}
         />
         <Title text={i18n.languge} textColor={titleColor} />
         {langugeOptions}

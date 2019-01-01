@@ -1,5 +1,3 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import { createDrawerNavigator, DrawerItems } from "react-navigation";
 import { DRAWER_WIDTH, SCREENS } from "~/common/constants";
 import ContentComponent from "./contentComponent";
